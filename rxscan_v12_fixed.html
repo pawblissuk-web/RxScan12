@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>RxScan — Pakistan Health App</title>
+</head>
+<body>
+<style>:root{--bg:#F4FAF9;--card:#fff;--tx:#1A3A3A;--sub:#5B7A7A;--br:rgba(7,169,150,.13);--pl:#E7F2F1;--inp:#fff;--inptx:#1A3A3A;--nb:#fff;--nbb:rgba(7,169,150,.15);--glass:rgba(255,255,255,0.7);--glass-border:rgba(7,169,150,0.18);--rem-icon-bg:#E7F2F1;--stat-bg:#E7F2F1;--rico-notif:#E7F2F1;--rico-food:#E8F5E9;--rico-lang:#E7F2F1;--rico-help:#E7F2F1;--rico-star:#FFF8E1;--tip-card:#fff}.dk{--bg:#071414;--card:#0F2222;--tx:#E8F5F3;--sub:#7ABFB8;--br:rgba(7,169,150,.28);--pl:rgba(7,169,150,.16);--inp:#0F2222;--inptx:#E8F5F3;--nb:#071414;--nbb:rgba(7,169,150,.22);--glass:rgba(15,34,34,0.92);--glass-border:rgba(7,169,150,.35);--rem-card-bg:linear-gradient(135deg,#0D2E2A,#112E26);--rem-card-border:rgba(7,169,150,.4);--rem-icon-bg:rgba(7,169,150,.22);--tip-card-bg:linear-gradient(135deg,#0D2535,#0F2A20);--tip-card-border:rgba(7,169,150,.38);--med-card-bg:linear-gradient(135deg,#1A1A2E,#16213E);--med-card-border:rgba(108,92,231,.4);--diet-card-bg:linear-gradient(135deg,#1A2010,#1E2A10);--diet-card-border:rgba(120,180,50,.35);--stat-bg:rgba(7,169,150,.18);--rico-notif:rgba(7,169,150,.22);--rico-food:rgba(50,200,100,.15);--rico-lang:rgba(7,169,150,.2);--rico-help:rgba(7,169,150,.18);--rico-star:rgba(255,200,50,.15);--tip-card:#152828}*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:#f0f4f4;transition:background .3s}body.dk-page{background:#020c0c}body.dk-page #outer-wrap{background:#020c0c}body.dk-page #top-btns button{background:#0F2222 !important;color:#07A996 !important;border-color:rgba(7,169,150,.3) !important}body.dk-page #top-btns button[style*="background:#07A996"]{background:#07A996 !important;color:#fff !important}.app{width:320px;height:640px;background:var(--bg);border-radius:36px;border:4px solid #07A996;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(7,169,150,.2);transition:background .3s}.scr{height:calc(100% - 54px);overflow-y:auto;overflow-x:hidden;scrollbar-width:none;background:var(--bg);transition:background .3s}.scr::-webkit-scrollbar{display:none}.h{display:none!important}@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes tipSlideIn{from{opacity:0;transform:translateX(40px) scale(.96)}to{opacity:1;transform:translateX(0) scale(1)}}@keyframes tipSlideOut{from{opacity:1;transform:translateX(0) scale(1)}to{opacity:0;transform:translateX(-40px) scale(.96)}}@keyframes achBounce{0%{transform:scale(0) rotate(-15deg)}60%{transform:scale(1.25) rotate(5deg)}80%{transform:scale(.9) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}@keyframes achFadeIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}@keyframes glassAdd{0%{transform:scale(1)}45%{transform:scale(1.5)}100%{transform:scale(1)}}@keyframes glassDel{0%{transform:scale(1)}45%{transform:scale(.55) rotate(-10deg)}100%{transform:scale(1)}}@keyframes sc{0%{top:5%}100%{top:90%}}@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}@keyframes pu{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}@keyframes bou{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}.a1{animation:fu .35s ease both}.a2{animation:fu .35s .06s ease both}.a3{animation:fu .35s .12s ease both}.a4{animation:fu .35s .18s ease both}.a5{animation:fu .35s .24s ease both}.shead{background:var(--card);padding:11px 13px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--br);transition:background .3s}.shead h2{font-size:14px;font-weight:700;color:var(--tx)}.shead small{font-size:9px;color:var(--sub);display:block}.bk{width:30px;height:30px;border-radius:9px;background:var(--pl);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;flex-shrink:0;transition:all .2s;color:var(--tx)}.bk:hover{background:#07A996;color:#fff}.btn{background:linear-gradient(90deg,#07A996,#059688);color:#fff;border:none;border-radius:11px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;width:100%;font-family:inherit;transition:all .2s}.inp{width:100%;border:1.5px solid rgba(7,169,150,.3);border-radius:10px;padding:9px 12px;font-size:12px;font-family:inherit;color:var(--inptx) !important;background:var(--inp) !important;outline:none;transition:border-color .2s;-webkit-text-fill-color:var(--inptx) !important}.inp:focus{border-color:#07A996;box-shadow:0 0 0 2px rgba(7,169,150,.1)}.inp::placeholder{color:var(--sub) !important;opacity:1}.inp:-webkit-autofill{-webkit-box-shadow:0 0 0 30px var(--inp) inset !important;-webkit-text-fill-color:var(--inptx) !important}select.inp{color:var(--inptx) !important;background:var(--inp) !important}.card{background:var(--card);border-radius:16px;border:1px solid var(--br);padding:13px;transition:background .3s}.tgl{width:38px;height:22px;border-radius:11px;position:relative;cursor:pointer;flex-shrink:0;transition:background .3s}.tgl.on{background:linear-gradient(90deg,#07A996,#059688)}.tgl.off{background:#b8ddd9}.tglk{width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:2px;box-shadow:0 1px 4px rgba(0,0,0,.15);transition:left .25s}.tgl.on .tglk{left:18px}.tgl.off .tglk{left:2px}.mov{position:absolute;inset:0;background:rgba(0,0,0,.48);display:flex;align-items:flex-end;z-index:200;animation:fu .2s ease}.mov.cnt{align-items:center;justify-content:center}.mbox{background:var(--card);border-radius:20px 20px 0 0;padding:18px 16px 26px;width:100%;max-height:76%;overflow-y:auto;transition:background .3s;border-top:1px solid var(--br)}.mbox::-webkit-scrollbar{display:none}.mbox.cb{border-radius:18px;width:calc(100% - 28px);max-height:70%}.mtit{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between}.mcls{width:24px;height:24px;background:var(--pl);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--sub)}.mopt{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--br);cursor:pointer}.mopt:last-child{border-bottom:none}.moptlbl{font-size:12px;font-weight:600;color:var(--tx)}.bnav{position:absolute;bottom:0;left:0;right:0;background:var(--nb);border-top:1px solid var(--nbb);display:flex;align-items:center;justify-content:space-around;padding:7px 0 9px;transition:background .3s}.ni{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;flex:1}.ni span{font-size:8px;font-weight:700;color:#8AACAC;transition:color .2s}.ni.act span{color:#07A996}.ni svg{width:18px;height:18px}.ncc{width:38px;height:38px;background:linear-gradient(135deg,#07A996,#059688);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:-14px;border:3px solid var(--bg);box-shadow:0 3px 10px rgba(7,169,150,.3);transition:border .3s}.ncc svg{width:16px;height:16px}.toast{position:absolute;bottom:62px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#07A996,#059688);color:#fff;padding:7px 14px;border-radius:20px;font-size:11px;font-weight:600;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;z-index:999}.thdr{background:var(--card);padding:10px 13px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--br);transition:background .3s}.tpill{background:#07A996;border-radius:16px;padding:4px 10px;color:#fff;font-size:10px;font-weight:600}.dkbtn{width:28px;height:28px;background:var(--pl);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;border:1px solid var(--br)}.bellbtn{width:28px;height:28px;background:var(--pl);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;border:1px solid var(--br)}.bellbtn svg path{stroke:var(--tx);transition:stroke .3s}.bdot{position:absolute;top:5px;right:5px;width:6px;height:6px;background:#FF6B6B;border-radius:50%;animation:pu 2s infinite}.gcard{background:var(--card);margin:8px 11px 0;border-radius:16px;padding:14px;border:1px solid var(--br)}.gcard h1{font-size:17px;font-weight:800;color:var(--tx);margin-bottom:4px;line-height:1.25}.gcard p{font-size:10px;color:var(--sub);margin-bottom:9px}.gbdg{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--br);border-radius:16px;padding:3px 9px;background:var(--pl)}.gbi{background:linear-gradient(135deg,#07A996,#059688);border-radius:3px;width:13px;height:13px;display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:800}.gbdg span{font-size:10px;font-weight:600;color:var(--tx)}.bnr{background:linear-gradient(135deg,#07A996,#059688);margin:8px 11px 0;border-radius:16px;padding:12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;overflow:hidden}.bnr h3{color:#fff;font-size:13px;font-weight:700;margin-bottom:2px}.bnr p{color:rgba(255,255,255,.85);font-size:9px}.bico{font-size:20px;animation:bou 3s infinite}.sec{padding:11px 11px 0}.stit{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px}.qg{display:grid;grid-template-columns:1fr 1fr;gap:7px}.qc{border-radius:14px;padding:13px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .2s}.qc:hover{transform:translateY(-2px)}.qci{width:36px;height:36px;background:rgba(255,255,255,.28);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:7px;font-size:18px;box-shadow:0 4px 12px rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.12)}.qc h3{color:#fff;font-size:11px;font-weight:700;margin-bottom:1px}.qc p{color:rgba(255,255,255,.8);font-size:9px}.qf{border-radius:14px;padding:13px;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:7px;transition:transform .2s}.qf:hover{transform:translateY(-1px)}.qfi{font-size:18px;width:36px;height:36px;background:rgba(255,255,255,.28);border-radius:9px;display:flex;align-items:center;justify-content:center;margin:0 auto 7px;box-shadow:0 4px 12px rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.12)}.qf h3{color:#fff;font-size:11px;font-weight:700;margin-bottom:1px}.qf p{color:rgba(255,255,255,.8);font-size:9px}.tc{background:var(--card);margin:0 11px;border-radius:14px;padding:13px;cursor:pointer;border:1px solid var(--br);transition:background .3s,border .3s}.dk .tc{background:var(--tip-card-bg);border-color:var(--tip-card-border);box-shadow:0 2px 16px rgba(7,169,150,.1)}.tiplbl{font-size:9px;font-weight:700;color:var(--sub);letter-spacing:.5px;text-transform:uppercase}.tiptxt{font-size:11px;color:var(--tx);font-style:italic;line-height:1.6;margin-top:5px}.wcard{background:var(--card);margin:7px 11px 0;border-radius:16px;padding:13px;border:1px solid var(--br)}.wbody{display:flex;align-items:center;gap:11px;margin-top:7px}.wctrl{flex:1}.wgoal{font-size:10px;color:var(--sub);margin-bottom:5px}.wbtns{display:flex;align-items:center;gap:6px}.wbtn{width:26px;height:26px;border-radius:50%;border:2px solid #07A996;background:var(--card);color:#07A996;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;transition:all .2s}.wbtn:hover{background:#07A996;color:#fff}.wcnt{font-size:12px;font-weight:700;color:var(--tx)}.mg{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:7px 11px 0}.mc{border-radius:14px;padding:12px;cursor:pointer;text-align:center;transition:transform .2s}.mc:hover{transform:translateY(-2px)}.mc h3{font-size:11px;font-weight:700;margin-bottom:1px}.mc p{font-size:9px}.svw{margin:11px;background:linear-gradient(135deg,#1A3A3A,#2D6A6A);border-radius:16px;padding:16px;display:flex;flex-direction:column;align-items:center;cursor:pointer}.sfr{width:110px;height:110px;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:10px}.sc2{position:absolute;width:16px;height:16px;border-color:#07A996;border-style:solid}.ctl{top:0;left:0;border-width:3px 0 0 3px;border-radius:3px 0 0 0}.ctr{top:0;right:0;border-width:3px 3px 0 0;border-radius:0 3px 0 0}.cbl{bottom:0;left:0;border-width:0 0 3px 3px;border-radius:0 0 0 3px}.cbr{bottom:0;right:0;border-width:0 3px 3px 0;border-radius:0 0 3px 0}.sln{position:absolute;width:82%;height:2px;background:linear-gradient(90deg,transparent,#07A996,transparent);animation:sc 1.8s ease-in-out infinite;left:9%;top:5%}.sopts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0 11px 11px}.sopt{background:var(--card);border-radius:12px;padding:13px 10px;display:flex;flex-direction:column;align-items:center;cursor:pointer;border:2px solid var(--br);transition:all .2s}.sopt:hover{border-color:#07A996}.sopt h3{font-size:11px;font-weight:700;color:var(--tx);margin-bottom:1px}.sopt p{font-size:9px;color:var(--sub)}.srchbar{background:var(--card);margin:11px;border-radius:12px;padding:9px 12px;display:flex;align-items:center;gap:8px;border:2px solid #07A996}.srchbar input{border:none;outline:none;font-size:11px;flex:1;color:var(--inptx) !important;background:transparent;font-family:inherit}.srchbar input::placeholder{color:var(--sub)}.mg2{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0 11px 11px}.mc2{border-radius:13px;padding:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;transition:transform .2s;border:1px solid var(--br)}.mc2:hover{transform:translateY(-2px)}.mc2 h3{font-size:11px;font-weight:700;margin-bottom:1px}.mc2 p{font-size:9px}.mdcard{background:var(--card);margin:0 11px 11px;border-radius:15px;padding:13px;border:1.5px solid #07A996;animation:fu .3s ease}.mdcard h3{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:9px}.mdrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--br)}.mdrow:last-child{border-bottom:none}.mdlbl{font-size:10px;color:var(--sub)}.mdval{font-size:10px;color:var(--tx);font-weight:600;text-align:right;max-width:56%}.chdr{background:var(--card);padding:9px 12px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--br)}.cava{width:30px;height:30px;background:linear-gradient(135deg,#07A996,#059688);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;animation:pu 3s infinite}.cmsgs{padding:11px;display:flex;flex-direction:column;gap:7px;height:270px;overflow-y:auto}.cmsgs::-webkit-scrollbar{display:none}.mai{background:linear-gradient(135deg,#07A996,#059688);color:#fff;border-radius:13px 13px 13px 3px;padding:7px 11px;max-width:82%;font-size:10px;line-height:1.7;align-self:flex-start;white-space:pre-line}.musr{background:var(--card);color:var(--tx);border-radius:13px 13px 3px 13px;padding:7px 11px;max-width:82%;font-size:10px;line-height:1.7;align-self:flex-end;border:1px solid var(--br);white-space:pre-line}.chips{padding:6px 11px;background:var(--pl);display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{background:var(--card);border:1px solid var(--br);border-radius:16px;padding:4px 10px;font-size:9px;font-weight:600;color:#07A996;cursor:pointer;white-space:nowrap}.chip:hover{background:#07A996;color:#fff}.cinprow{padding:7px 11px;background:var(--card);border-top:1px solid var(--br);display:flex;gap:6px;align-items:center}.cinp{flex:1;border:1px solid var(--br);border-radius:18px;padding:6px 11px;font-size:11px;outline:none;color:var(--inptx) !important;font-family:inherit;background:var(--inp) !important}.cinp::placeholder{color:var(--sub)}.cinp:focus{border-color:#07A996}.sndbtn{width:30px;height:30px;background:linear-gradient(135deg,#07A996,#059688);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}.remcard{background:#fff;border:1px solid rgba(7,169,150,.18);border-radius:13px;padding:11px 12px;margin-bottom:7px;display:flex;align-items:center;gap:9px;animation:fu .3s ease;transition:all .3s;box-shadow:0 2px 12px rgba(7,169,150,.08)}.tc{background:#fff;border:1px solid rgba(7,169,150,.18);margin:0 11px;border-radius:14px;padding:13px;cursor:pointer;transition:all .3s;box-shadow:0 2px 12px rgba(7,169,150,.08)}.dietday{background:#fff;border:1px solid rgba(7,169,150,.18);border-radius:14px;overflow:hidden;margin-bottom:7px;transition:all .3s;box-shadow:0 2px 12px rgba(7,169,150,.08)}.dk .remcard{background:linear-gradient(135deg,#0A3D30,#0E4A38);border-color:rgba(7,200,160,.35);box-shadow:0 4px 20px rgba(7,169,150,.2)}.dk .tc{background:linear-gradient(135deg,#2D2008,#3A2C0A);border-color:rgba(240,180,30,.35);box-shadow:0 4px 20px rgba(240,180,30,.15)}.dk .dietday{background:linear-gradient(135deg,#0D2D10,#143318);border-color:rgba(80,200,90,.35);box-shadow:0 4px 20px rgba(56,178,90,.15)}.remdel{width:24px;height:24px;background:rgba(229,62,62,.1);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px}.remform{background:var(--card);margin:0 11px 11px;border-radius:15px;padding:13px;border:2px solid #07A996;animation:fu .3s ease}.ddhdr{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;cursor:pointer}.ddnm{font-size:12px;font-weight:700;color:var(--tx)}.ddcal{font-size:10px;font-weight:700;color:#07A996;background:rgba(7,169,150,.1);padding:3px 8px;border-radius:16px;border:1px solid rgba(7,169,150,.2)}.dk .ddcal{color:#5EEAD4;background:rgba(7,169,150,.2);border-color:rgba(7,169,150,.35)}.ddbd{padding:0 13px 11px;border-top:1px solid var(--br)}.ddml{padding:7px 0;border-bottom:1px solid var(--br)}.ddml:last-child{border-bottom:none}.ddmn{font-size:10px;font-weight:700;color:var(--tx);margin-bottom:1px}.ddms{font-size:9px;color:var(--sub)}.cprog{height:3px;background:var(--br);overflow:hidden}.cpb{height:3px;background:linear-gradient(90deg,#07A996,#059688)}.pav{width:56px;height:56px;background:linear-gradient(135deg,#07A996,#059688);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 9px;box-shadow:0 4px 14px rgba(7,169,150,.25);animation:bou 4s infinite;overflow:hidden}.pnm{font-size:15px;font-weight:800;color:var(--tx);text-align:center;margin-bottom:2px}.peml{font-size:10px;color:var(--sub);text-align:center;margin-bottom:11px}.pstats{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:11px}.pst{background:#fff;border-radius:9px;padding:8px 4px;text-align:center;border:1px solid rgba(7,169,150,.18);box-shadow:0 1px 6px rgba(7,169,150,.07)}.dk .pst{background:rgba(7,169,150,.12);border-color:rgba(7,169,150,.28)}.pstv{font-size:15px;font-weight:800;color:#07A996;margin-bottom:1px}.pstl{font-size:8px;color:var(--sub);font-weight:600}.prow{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(7,169,150,.1)}.prow:last-child{border-bottom:none}.prowl{font-size:10px;color:var(--sub)}.prowv{font-size:10px;color:#07A996;font-weight:700}.sprof{background:linear-gradient(135deg,#07A996,#059688);margin:7px 11px;border-radius:16px;padding:14px;display:flex;align-items:center;gap:11px}.spav{width:44px;height:44px;background:rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;border:2px solid rgba(255,255,255,.4)}.spnm{font-size:13px;font-weight:800;color:#fff;margin-bottom:1px}.speml{font-size:10px;color:rgba(255,255,255,.8);margin-bottom:6px}.spedit{background:rgba(255,255,255,.22);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:14px;padding:4px 10px;font-size:9px;font-weight:700;cursor:pointer;font-family:inherit}.sstatrow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 11px 3px}.sstatc{background:var(--stat-bg);border-radius:11px;padding:9px 6px;text-align:center;border:1px solid var(--br)}.sstatv{font-size:16px;font-weight:800;color:#07A996;margin-bottom:1px}.sstatl{font-size:9px;font-weight:600;color:var(--tx)}.ssec{margin:11px 11px 0}.shdr{font-size:9px;font-weight:800;color:#07A996;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}.scard{background:var(--card);border-radius:13px;border:1px solid var(--br);overflow:hidden;margin-bottom:3px;transition:background .3s,border .3s}.dk .scard{background:linear-gradient(135deg,#0D2222,#0F1E2E);border-color:rgba(7,169,150,.32);box-shadow:0 2px 14px rgba(7,169,150,.08)}.rrow{display:flex;align-items:center;gap:9px;padding:10px 12px;border-bottom:1px solid var(--br);cursor:pointer;transition:background .15s}.rrow:last-child{border-bottom:none}.rrow:hover{background:var(--pl)}.rico{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}.rtit{font-size:11px;font-weight:600;color:var(--tx)}.rsub{font-size:9px;color:var(--sub)}.chev{font-size:14px;color:var(--sub);margin-left:auto}.lhdr{background:linear-gradient(135deg,#07A996,#059688);padding:26px 18px 20px;position:relative;overflow:hidden}.lhdr::before{content:'';position:absolute;top:-25px;right:-15px;width:80px;height:80px;background:rgba(255,255,255,.08);border-radius:50%}.lwel{font-size:15px;font-weight:800;color:#fff;margin-bottom:2px}.lsub{font-size:10px;color:rgba(255,255,255,.82)}.lbody{padding:14px;overflow-y:auto;height:calc(100% - 108px)}.lbody::-webkit-scrollbar{display:none}.tabrow{display:flex;background:var(--pl);border-radius:10px;padding:3px;margin-bottom:14px}.tabbtn{flex:1;padding:7px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;background:transparent;color:var(--sub);transition:all .25s}.tabbtn.act{background:var(--card);color:#07A996}.flbl{font-size:9px;font-weight:700;color:var(--sub);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}.fg{margin-bottom:11px}.ferr{font-size:9px;color:#E53E3E;margin-top:3px;display:none}.linp{width:100%;border:1.5px solid rgba(7,169,150,.3);border-radius:10px;padding:9px 12px;font-size:12px;font-family:inherit;background:#fff !important;color:#1A3A3A !important;-webkit-text-fill-color:#1A3A3A !important;outline:none;transition:border-color .2s}.linp:focus{border-color:#07A996;box-shadow:0 0 0 2px rgba(7,169,150,.1)}.linp::placeholder{color:#5B7A7A !important;opacity:1}.linp:-webkit-autofill{-webkit-box-shadow:0 0 0 30px #fff inset !important;-webkit-text-fill-color:#1A3A3A !important}.gbtn{width:100%;background:var(--card);border:1.5px solid rgba(7,169,150,.25);border-radius:11px;padding:10px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-bottom:14px;transition:all .2s}.gbtn:hover{border-color:#07A996}.gbtn span{font-size:11px;font-weight:600;color:var(--tx)}.togauth{text-align:center;font-size:10px;color:var(--sub)}.togauth a{color:#07A996;font-weight:700;cursor:pointer}.dvrow{display:flex;align-items:center;gap:8px;margin:6px 0 10px}.dvline{flex:1;height:1px;background:var(--br)}.dvtxt{font-size:9px;color:var(--sub)}.frow{text-align:right;margin-top:-4px;margin-bottom:9px}.flnk{font-size:10px;color:#07A996;font-weight:600;cursor:pointer}.obsw{overflow:hidden;flex:1}.obsl{display:flex;height:100%;width:300%;transition:transform .42s cubic-bezier(.4,0,.2,1)}.obslide{width:33.333%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px 14px;text-align:center}.obem{width:100px;height:100px;background:linear-gradient(135deg,#07A996,#059688);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:22px;box-shadow:0 8px 28px rgba(7,169,150,.3);animation:fl 4s ease-in-out infinite}.obtit{font-size:20px;font-weight:800;color:var(--tx);margin-bottom:9px}.obdesc{font-size:11px;color:var(--sub);line-height:1.7;max-width:220px}.obbot{padding:14px 18px 24px;display:flex;flex-direction:column;align-items:center;gap:9px}.obdots{display:flex;gap:5px}.obdot{width:7px;height:7px;border-radius:4px;background:rgba(7,169,150,.2);transition:all .3s}.obdot.act{width:18px;background:#07A996}.obbtns{display:flex;gap:8px;width:100%}.obnxt{flex:1;background:linear-gradient(90deg,#07A996,#059688);color:#fff;border:none;border-radius:11px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}.obskbtn{background:transparent;color:var(--sub);border:1px solid rgba(7,169,150,.2);border-radius:11px;padding:11px 13px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit}.obgs{width:100%;background:linear-gradient(90deg,#07A996,#059688);color:#fff;border:none;border-radius:11px;padding:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}.dgoalbtn{display:flex;align-items:center;gap:6px;padding:9px 11px;border-radius:11px;background:var(--card);border:1.5px solid var(--br);font-size:11px;font-weight:600;color:var(--tx);cursor:pointer;transition:all .2s}.dgoalbtn:hover{border-color:#07A996}.dgoalbtn-act{background:linear-gradient(135deg,#07A996,#059688) !important;border-color:transparent !important;color:#fff !important}.ddaytab{flex-shrink:0;min-width:36px;padding:5px 9px;border-radius:18px;background:var(--card);border:1.5px solid var(--br);font-size:10px;font-weight:700;color:var(--sub);cursor:pointer;transition:all .2s;text-align:center}.ddaytab-act{background:linear-gradient(135deg,#07A996,#059688) !important;border-color:transparent !important;color:#fff !important}.dmealcard{background:var(--card);border-radius:14px;padding:12px 13px;border:1px solid var(--br);box-shadow:0 2px 10px rgba(7,169,150,.07);animation:fu .3s ease;transition:background .3s,border .3s}.dk .dmealcard{background:linear-gradient(135deg,#0D2E20,#0F2A1A);border-color:rgba(7,169,150,.3);box-shadow:0 4px 18px rgba(7,169,150,.12)}.dmealicon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}.dmealname{font-size:13px;font-weight:700;color:var(--tx)}.dmealdesc{font-size:10px;color:var(--sub);margin-top:3px;line-height:1.5}</style>
+<div style="display:flex;flex-direction:column;align-items:center;gap:9px;padding:8px 0;" id="outer-wrap"><div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:660px;" id="top-btns"><button onclick="gx('home',0,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#07A996;color:#fff;font-size:11px;cursor:pointer;font-family:inherit;">Home</button><button onclick="gx('scanner',1,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#fff;color:#07A996;font-size:11px;cursor:pointer;font-family:inherit;">Parchi</button><button onclick="gx('food',null,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#fff;color:#07A996;font-size:11px;cursor:pointer;font-family:inherit;">Food</button><button onclick="gx('medicine',2,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#fff;color:#07A996;font-size:11px;cursor:pointer;font-family:inherit;">Medicine</button><button onclick="gx('chat',3,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#fff;color:#07A996;font-size:11px;cursor:pointer;font-family:inherit;">AI Chat</button><button onclick="gx('reminders',4,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#fff;color:#07A996;font-size:11px;cursor:pointer;font-family:inherit;">Reminders</button><button onclick="gx('diet',null,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#fff;color:#07A996;font-size:11px;cursor:pointer;font-family:inherit;">Diet</button><button onclick="gx('profile',null,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#fff;color:#07A996;font-size:11px;cursor:pointer;font-family:inherit;">Profile</button><button onclick="gx('settings',4,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#fff;color:#07A996;font-size:11px;cursor:pointer;font-family:inherit;">Settings</button><button onclick="gx('login',null,this)" style="padding:4px 10px;border-radius:14px;border:1px solid rgba(7,169,150,.3);background:#fff;color:#07A996;font-size:11px;cursor:pointer;font-family:inherit;">Login</button></div><div class="app" id="app"><div class="scr" id="scr"><div id="s-splash" style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#F4FAF9,#E7F2F1,#d4ede9);position:relative;overflow:hidden;"><div style="position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(7,169,150,.12),transparent 70%);top:-40px;right:-40px;"></div><div style="text-align:center;"><div style="width:76px;height:76px;background:linear-gradient(135deg,#07A996,#059688);border-radius:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 10px 30px rgba(7,169,150,.32);animation:fl 4s ease-in-out infinite;"><svg width="40" height="40" viewBox="0 0 52 52" fill="none"><rect x="6" y="6" width="16" height="16" rx="4" stroke="#fff" stroke-width="3"/><rect x="30" y="6" width="16" height="16" rx="4" stroke="#fff" stroke-width="3"/><rect x="6" y="30" width="16" height="16" rx="4" stroke="#fff" stroke-width="3"/><circle cx="38" cy="38" r="8" stroke="#fff" stroke-width="3"/><line x1="38" y1="34" x2="38" y2="42" stroke="#fff" stroke-width="3" stroke-linecap="round"/><line x1="34" y1="38" x2="42" y2="38" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></div><div style="font-size:32px;font-weight:900;margin-bottom:3px;"><span style="color:#1A3A3A;">Rx</span><span style="background:linear-gradient(90deg,#07A996,#059688);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Scan</span></div><div style="font-size:11px;font-weight:600;color:#07A996;margin-bottom:3px;">Pakistan's #1 Health App</div><div style="font-size:10px;color:#5B7A7A;margin-bottom:28px;" data-lid="splash_sub">Your Health, Our Priority</div><div style="display:inline-flex;align-items:center;gap:5px;background:#E7F2F1;border:1px solid rgba(7,169,150,.25);border-radius:16px;padding:5px 11px;margin-bottom:40px;"><span style="font-size:9px;font-weight:700;color:#07A996;">✨ Powered by AI</span></div></div><div style="position:absolute;bottom:40px;left:32px;right:32px;"><div style="height:3px;background:rgba(7,169,150,.15);border-radius:2px;overflow:hidden;"><div id="splashbar" style="height:3px;background:linear-gradient(90deg,#07A996,#059688);border-radius:2px;width:0%;transition:width .08s linear;"></div></div><div style="text-align:center;margin-top:8px;font-size:9px;color:#5B7A7A;" data-lid="splash_tagline">Aapki sehat, hamari zimmedari</div></div></div><div id="s-onboarding" class="h" style="height:100%;display:flex;flex-direction:column;position:relative;background:var(--bg);"><div style="position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;color:#07A996;cursor:pointer;padding:4px 9px;border-radius:14px;background:var(--pl);z-index:10;border:1px solid rgba(7,169,150,.2);" onclick="go('login')">Skip</div><div class="obsw"><div class="obsl" id="obsl"><div class="obslide"><div class="obem">🔍</div><div class="obtit">Scan Instantly</div><div class="obdesc">Scan any medicine or food — complete info in seconds, bilkul free!</div></div><div class="obslide"><div class="obem" style="animation-delay:.5s;">🍽️</div><div class="obtit">Track Nutrition</div><div class="obdesc">Log daily meals, count calories, healthier lifestyle build karein!</div></div><div class="obslide"><div class="obem" style="animation-delay:1s;">💊</div><div class="obtit">Never Miss a Dose</div><div class="obdesc">Smart reminders — RxScan will always remind you on time!</div></div></div></div><div class="obbot"><div class="obdots" id="obdots"></div><div class="obbtns" id="obbtns"><button class="obskbtn" onclick="go('login')">Skip</button><button class="obnxt" onclick="obNext()">Next →</button></div></div></div><div id="s-login" class="h" style="height:100%;display:flex;flex-direction:column;background:var(--bg);"><div class="lhdr"><div style="display:flex;align-items:center;gap:7px;margin-bottom:7px;"><div style="width:26px;height:26px;background:rgba(255,255,255,.2);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;">🔬</div><div style="font-size:16px;font-weight:900;color:#fff;">RxScan</div></div><div class="lwel" id="lwel">Welcome back! 👋</div><div class="lsub">Sign in to continue your health journey</div></div><div class="lbody"><div class="tabrow"><button class="tabbtn act" id="tabl" onclick="switchTab('login')">Login</button><button class="tabbtn" id="tabs" onclick="switchTab('signup')">Sign Up</button></div><div id="login-form"><div class="fg"><label class="flbl" style="color:var(--sub);">EMAIL ADDRESS</label><input type="email" class="linp" id="l-em" placeholder="you@example.com"><div class="ferr" id="l-em-e">Please enter a valid email</div></div><div class="fg"><label class="flbl" style="color:var(--sub);">PASSWORD</label><input type="password" class="linp" id="l-pw" placeholder="Enter your password"><div class="ferr" id="l-pw-e">Password cannot be empty</div></div><div class="frow"><span class="flnk" onclick="showModal('forgot-modal')">Forgot Password?</span></div><button class="btn" onclick="doLogin()">Login to RxScan</button></div><div id="signup-form" class="h"><div class="fg"><label class="flbl" style="color:var(--sub);">FULL NAME</label><input type="text" class="linp" id="s-nm" placeholder="Rizwan Ahmed"><div class="ferr" id="s-nm-e">Name required</div></div><div class="fg"><label class="flbl" style="color:var(--sub);">EMAIL</label><input type="email" class="linp" id="s-em" placeholder="you@example.com"><div class="ferr" id="s-em-e">Valid email required</div></div><div class="fg"><label class="flbl" style="color:var(--sub);">PASSWORD</label><input type="password" class="linp" id="s-pw" placeholder="Min 8 characters"><div class="ferr" id="s-pw-e">Min 8 characters</div></div><div class="fg"><label class="flbl" style="color:var(--sub);">CONFIRM PASSWORD</label><input type="password" class="linp" id="s-cpw" placeholder="Repeat password"><div class="ferr" id="s-cpw-e">Passwords don't match</div></div><button class="btn" onclick="doSignup()">Create Account</button></div><div class="dvrow"><div class="dvline"></div><div class="dvtxt">or continue with</div><div class="dvline"></div></div><div class="gbtn" onclick="showModal('google-modal')"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg><span>Continue with Google</span></div><div class="togauth" id="auth-tog">Don't have an account? <a onclick="switchTab('signup')">Sign Up</a></div></div></div><div id="s-home" class="h"><div class="thdr a1"><div class="tpill" id="tpill">12:00 PM</div><div style="display:flex;align-items:center;gap:6px;"><div class="dkbtn" id="dkbtn" onclick="toggleDark()">🌙</div><div class="bellbtn" onclick="toast(T('bell_toast'))"><div class="bdot"></div><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke-width="2"/><path d="M13.73 21a2 2 0 0 1-3.46 0" stroke-width="2"/></svg></div></div></div><div class="gcard a2"><h1 id="greet-txt">Good Morning, Rizwan! 👋</h1><p id="home-sub-txt">Pakistan's #1 Health App — Your health, our responsibility</p><div class="gbdg"><div class="gbi">Rx</div><span>⭐ 4.9 · 50,000+ Users</span></div></div><div class="bnr a3" onclick="go('tips')"><div><h3>💡 Smart Health Tips</h3><p>Har roz naye tips</p></div><div class="bico">🌿</div></div><div class="sec"><div class="stit a3">Quick Actions</div><div class="qg a3"><div class="qc" style="background:linear-gradient(135deg,#07A996,#059688);box-shadow:0 6px 18px rgba(7,169,150,.4);" onclick="go('scanner')"><div class="qci">📋</div><h3>Parchi Scan</h3><p>Scan prescriptions</p></div><div class="qc" style="background:linear-gradient(135deg,#2563EB,#1D4ED8);box-shadow:0 6px 18px rgba(37,99,235,.4);" onclick="go('chat')"><div class="qci">💬</div><h3>AI Doctor</h3><p>Chat with AI doctor</p></div></div><div class="qg a4" style="margin-top:7px;"><div class="qc" style="background:linear-gradient(135deg,#FF6B35,#E53E00);box-shadow:0 6px 18px rgba(255,107,53,.45);" onclick="go('food')"><div class="qci">🍽️</div><h3>Food Scanner</h3><p>Scan food calories</p></div><div class="qc" style="background:linear-gradient(135deg,#F59E0B,#B45309);box-shadow:0 6px 18px rgba(245,158,11,.45);" onclick="go('reminders')"><div class="qci">🔔</div><h3>Reminders</h3><p>Medicine reminders</p></div></div><div class="qf a5" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9);box-shadow:0 6px 18px rgba(139,92,246,.4);" onclick="go('medicine')"><div class="qfi">🔍</div><div><h3>Medicine Search</h3><p>AI drug information</p></div></div></div><div class="sec a5"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;"><div class="stit" style="margin:0;">Smart Tips</div><div style="display:flex;gap:3px;" id="tdots"></div></div><div class="tc" onclick="nxt()" style="overflow:hidden;position:relative;min-height:64px;"><div id="tip-inner" style="display:flex;align-items:flex-start;gap:7px;transition:none;"><div id="tico" style="font-size:22px;flex-shrink:0;transition:transform .3s ease;">🍎</div><div style="flex:1;"><div class="tiplbl" style="margin-bottom:3px;">Health Tip</div><div class="tiptxt" id="ttxt" style="transition:none;">An apple a day keeps the doctor away.</div></div><div style="font-size:9px;color:rgba(7,169,150,.6);margin-top:2px;flex-shrink:0;">›</div></div></div></div><div class="sec a5"><div class="stit">Water Tracking</div><div class="wcard" style="position:relative;overflow:hidden;"><div id="w-achieve" style="display:none;position:absolute;inset:0;border-radius:14px;background:linear-gradient(135deg,rgba(7,169,150,.92),rgba(5,150,136,.95));z-index:10;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px;"><div id="w-ach-ico" style="font-size:36px;margin-bottom:4px;animation:achBounce .6s ease;">🎉</div><div style="color:#fff;font-weight:800;font-size:13px;margin-bottom:2px;">Daily Goal Complete!</div><div id="w-ach-sub" style="color:rgba(255,255,255,.85);font-size:10px;">Zabardast! 8/8 glasses pee liye 💪</div><button onclick="closeAchieve()" style="margin-top:10px;background:rgba(255,255,255,.22);border:1.5px solid rgba(255,255,255,.5);color:#fff;border-radius:20px;padding:5px 18px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;">Shukriya! ✨</button></div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;"><div style="font-size:11px;font-weight:700;color:var(--tx);">💧 Water Intake</div><button id="w-edit-btn" onclick="toggleWEdit()" style="background:none;border:none;cursor:pointer;padding:3px;border-radius:8px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#07A996" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button></div><div id="w-edit-row" style="display:none;align-items:center;gap:7px;margin-bottom:10px;animation:fu .25s ease;"><input id="w-goal-inp" type="number" min="1" max="20" value="8" style="width:48px;padding:5px 7px;border-radius:9px;border:1.5px solid #07A996;background:var(--inp);color:var(--tx);font-size:13px;font-weight:700;text-align:center;font-family:inherit;outline:none;"><span style="font-size:10px;color:var(--sub);flex:1;">glasses goal</span><button onclick="saveWGoal()" style="background:linear-gradient(135deg,#07A996,#059688);color:#fff;border:none;border-radius:10px;padding:6px 14px;font-size:10px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 3px 10px rgba(7,169,150,.35);">Save</button></div><div id="w-progbar-wrap" style="margin-bottom:8px;"><div style="font-size:9px;color:var(--sub);margin-bottom:3px;" id="w-pct-lbl">0% of daily goal</div><div style="height:6px;border-radius:99px;background:var(--br);overflow:hidden;"><div id="w-progbar" style="height:100%;width:0%;border-radius:99px;background:linear-gradient(90deg,#07A996,#05c9b4);transition:width .5s cubic-bezier(.4,0,.2,1);"></div></div></div><div class="wbody"><svg width="54" height="54" viewBox="0 0 54 54"><defs><linearGradient id="wg"><stop offset="0%" stop-color="#07A996"/><stop offset="100%" stop-color="#059688"/></linearGradient></defs><circle cx="27" cy="27" r="21" fill="none" stroke="var(--br)" stroke-width="4.5"/><circle cx="27" cy="27" r="21" fill="none" stroke="url(#wg)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="131.9" id="wr" stroke-dashoffset="131.9" transform="rotate(-90 27 27)" style="transition:stroke-dashoffset .6s ease;"/><text x="27" y="28" text-anchor="middle" font-size="9" font-weight="700" id="wpct" fill="currentColor" font-family="system-ui,sans-serif" style="fill:var(--tx)">0</text><text x="27" y="38" text-anchor="middle" font-size="7" fill="currentColor" font-family="system-ui,sans-serif" style="fill:var(--sub);" id="wpct-goal">/8</text></svg><div class="wctrl"><div class="wgoal" id="wgl">0 of 8 glasses</div><div id="wdots" style="display:flex;gap:3px;margin:5px 0;flex-wrap:wrap;"></div><div class="wbtns"><button class="wbtn" onclick="uw(-1)">−</button><span class="wcnt" id="wcnt">0/8</span><button class="wbtn" onclick="uw(1)">+</button></div></div></div></div></div><div class="sec a5" id="home-fam-rem-sec" style="display:none;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;"><div class="stit" style="margin:0;">&#9200; Family Reminders</div><div onclick="go('profile')" style="font-size:9px;font-weight:700;color:#07A996;cursor:pointer;">See All &rsaquo;</div></div><div style="position:relative;"><div id="home-fam-rem-list" style="overflow:hidden;border-radius:14px;"></div><div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;"><div onclick="famRemPrev()" style="width:26px;height:26px;border-radius:50%;background:var(--pl);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:#07A996;font-weight:700;">&lsaquo;</div><div id="fam-rem-dots" style="display:flex;gap:4px;align-items:center;min-width:40px;justify-content:center;"></div><div onclick="famRemNext()" style="width:26px;height:26px;border-radius:50%;background:var(--pl);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:#07A996;font-weight:700;">&rsaquo;</div></div></div></div><div class="mg a5"><div class="mc" style="background:linear-gradient(135deg,#11998e,#38ef7d);box-shadow:0 4px 18px rgba(17,153,142,.35);" onclick="go('diet')"><div style="width:36px;height:36px;background:rgba(255,255,255,.28);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 7px;box-shadow:0 4px 12px rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.12);">🥗</div><h3 style="color:#fff;">Diet Plan</h3><p style="color:rgba(255,255,255,.82);">AI meal planner</p></div><div class="mc" style="background:linear-gradient(135deg,#7C3AED,#6D28D9);box-shadow:0 4px 18px rgba(109,40,217,.35);" onclick="go('profile')"><div style="width:36px;height:36px;background:rgba(255,255,255,.28);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 7px;box-shadow:0 4px 12px rgba(0,0,0,.18),0 1px 3px rgba(0,0,0,.12);">👨‍👩‍👧</div><h3 style="color:#fff;">Family Members</h3><p style="color:rgba(255,255,255,.82);">3 members</p></div></div><div style="height:8px;"></div></div><div id="s-scanner" class="h"><div class="shead"><div class="bk" onclick="go('home')">←</div><div><h2>Parchi Scanner</h2><small>AI prescription reader</small></div></div><div class="svw" style="cursor:default;"><div class="sfr" id="scan-frame-default"><div class="sc2 ctl"></div><div class="sc2 ctr"></div><div class="sc2 cbl"></div><div class="sc2 cbr"></div><img id="scan-preview-img" src="" alt="" style="display:none;width:90px;height:90px;object-fit:cover;border-radius:10px;border:2px solid #07A996;"><div id="scan-frame-icon" style="font-size:32px;opacity:.6;">📋</div><div class="sln"></div></div><div style="color:#07A996;font-size:11px;font-weight:700;margin-bottom:2px;" id="scan-prompt-txt">Scan your prescription here</div><div style="color:rgba(255,255,255,.55);font-size:9px;" id="scan-tap-txt">Choose Camera or Gallery below</div></div><input type="file" id="scan-camera-input" accept="image/*" capture="environment" style="display:none;" onchange="handleScanFile(this)"><input type="file" id="scan-gallery-input" accept="image/*" style="display:none;" onchange="handleScanFile(this)"><div class="sopts"><div class="sopt" style="cursor:pointer;" onclick="document.getElementById('scan-camera-input').click()"><div style="font-size:20px;margin-bottom:5px;">📷</div><h3>Camera</h3><p>Live photo</p></div><div class="sopt" style="cursor:pointer;" onclick="document.getElementById('scan-gallery-input').click()"><div style="font-size:20px;margin-bottom:5px;">🖼️</div><h3>Gallery</h3><p>Upload photo</p></div></div><div id="scan-loader" class="h" style="margin:0 11px 11px;background:var(--card);border-radius:14px;padding:18px;border:1.5px solid #07A996;text-align:center;"><div style="font-size:28px;margin-bottom:8px;animation:fl 1.5s infinite;">🔍</div><div style="font-size:12px;font-weight:700;color:#07A996;margin-bottom:4px;">AI Analyzing...</div><div style="font-size:10px;color:var(--sub);">Prescription parhi ja rahi hai...</div></div><div id="scan-result" class="h" style="margin:0 11px 11px;background:var(--card);border-radius:14px;padding:12px;border:1.5px solid #07A996;animation:fu .4s ease;"><div style="font-size:11px;font-weight:700;color:#07A996;margin-bottom:9px;">✅ Prescription Read!</div><div id="scan-result-body"></div></div><div style="margin:0 11px 7px;font-size:11px;font-weight:700;color:var(--tx);">Recent Scans</div><div class="card" style="margin:0 11px 11px;" id="scan-history-list"><div style="font-size:10px;color:var(--sub);text-align:center;padding:8px;">No scans yet. Upload a prescription above!</div></div></div><div id="s-food" class="h"><div class="shead"><div class="bk" onclick="go('home')">←</div><div><h2>Food Scanner</h2><small>AI nutrition analyzer</small></div></div><div style="background:linear-gradient(135deg,#E53E3E,#C53030);margin:11px;border-radius:16px;padding:18px;display:flex;flex-direction:column;align-items:center;text-align:center;"><div style="font-size:38px;margin-bottom:9px;animation:bou 3s infinite;">🍽️</div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px;" id="food-heading-txt">Food Calorie Scanner</div><div style="font-size:10px;color:rgba(255,255,255,.85);margin-bottom:11px;" id="food-heading-sub-txt">Take a photo of your food — find out the calories</div><button style="background:rgba(255,255,255,.22);color:#fff;border:2px solid rgba(255,255,255,.4);border-radius:18px;padding:7px 18px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;" onclick="doFoodScan()">📷 Scan Now</button></div><div style="margin:0 11px 9px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;"><div style="border-radius:12px;padding:9px 6px;text-align:center;background:linear-gradient(135deg,#07A996,#059688);"><div style="font-size:16px;font-weight:800;color:#fff;" id="fcal">1240</div><div style="font-size:8px;font-weight:600;color:rgba(255,255,255,.85);">Calories</div></div><div style="border-radius:12px;padding:9px 6px;text-align:center;background:linear-gradient(135deg,#2D6A6A,#1a4444);"><div style="font-size:16px;font-weight:800;color:#07A996;" id="fpro">48g</div><div style="font-size:8px;font-weight:600;color:rgba(255,255,255,.75);">Protein</div></div><div style="border-radius:12px;padding:9px 6px;text-align:center;background:var(--pl);border:1px solid var(--br);"><div style="font-size:16px;font-weight:800;color:var(--tx);" id="fcar">156g</div><div style="font-size:8px;font-weight:600;color:var(--sub);">Carbs</div></div></div><div id="food-result" class="h" style="margin:0 11px 11px;background:linear-gradient(135deg,#1A3A3A,#2D6A6A);border-radius:14px;padding:13px;border:2px solid #07A996;"></div><div style="margin:0 11px 7px;font-size:11px;font-weight:700;color:var(--tx);" id="food-log-lbl">Food Log</div><div class="card" style="margin:0 11px 11px;" id="food-log"></div></div><div id="s-medicine" class="h"><div class="shead"><div class="bk" onclick="medBack()">←</div><div><h2>Medicine Search</h2><small>AI drug database</small></div></div><div id="med-sv"><div class="srchbar"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#07A996" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#07A996" stroke-width="2" stroke-linecap="round"/></svg><input type="text" placeholder="Type medicine name..." id="med-inp" oninput="medSearch(this.value)"></div><div id="med-res" style="margin:0 11px 11px;display:flex;flex-direction:column;gap:6px;"></div><div style="margin:0 11px 7px;font-size:11px;font-weight:700;color:var(--tx);" id="med-popular-lbl">Popular Medicines</div><div class="mg2"><div class="mc2" style="background:linear-gradient(135deg,#E7F2F1,#d4ede9);" onclick="showMed('panadol')"><div style="font-size:18px;margin-bottom:4px;">💊</div><h3 style="color:#07A996;">Panadol</h3><p style="color:#5B7A7A;">Paracetamol 500mg</p></div><div class="mc2" style="background:linear-gradient(135deg,#2D6A6A,#1a4444);" onclick="showMed('augmentin')"><div style="font-size:18px;margin-bottom:4px;">💊</div><h3 style="color:#07A996;">Augmentin</h3><p style="color:rgba(255,255,255,.7);">Amoxicillin 625mg</p></div><div class="mc2" style="background:linear-gradient(135deg,#E7F2F1,#d4ede9);" onclick="showMed('brufen')"><div style="font-size:18px;margin-bottom:4px;">💊</div><h3 style="color:#07A996;">Brufen</h3><p style="color:#5B7A7A;">Ibuprofen 400mg</p></div><div class="mc2" style="background:linear-gradient(135deg,#2D6A6A,#1a4444);" onclick="showMed('flagyl')"><div style="font-size:18px;margin-bottom:4px;">💊</div><h3 style="color:#07A996;">Flagyl</h3><p style="color:rgba(255,255,255,.7);">Metronidazole</p></div><div class="mc2" style="background:linear-gradient(135deg,#E7F2F1,#d4ede9);" onclick="showMed('ors')"><div style="font-size:18px;margin-bottom:4px;">🧂</div><h3 style="color:#07A996;">ORS</h3><p style="color:#5B7A7A;">Rehydration</p></div><div class="mc2" style="background:linear-gradient(135deg,#2D6A6A,#1a4444);" onclick="showMed('disprin')"><div style="font-size:18px;margin-bottom:4px;">💊</div><h3 style="color:#07A996;">Disprin</h3><p style="color:rgba(255,255,255,.7);">Aspirin 300mg</p></div></div></div><div id="med-dv" class="h" style="padding:0 0 70px;"><div style="background:linear-gradient(135deg,#07A996,#059688);margin:11px 11px 0;border-radius:16px;padding:16px;position:relative;overflow:hidden;"><div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;background:rgba(255,255,255,.1);border-radius:50%;"></div><div style="font-size:22px;margin-bottom:6px;" id="md-icon">💊</div><div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:4px;" id="md-nm">-</div><div style="display:inline-block;background:rgba(255,255,255,.2);border-radius:20px;padding:3px 10px;"><span style="font-size:10px;font-weight:600;color:#fff;" id="md-type">Medicine</span></div><div style="margin-top:10px;display:flex;align-items:center;gap:6px;"><div style="background:rgba(255,255,255,.15);border-radius:10px;padding:5px 10px;"><div style="font-size:8px;color:rgba(255,255,255,.75);">Price (PKR)</div><div style="font-size:11px;font-weight:700;color:#fff;" id="md-price">-</div></div></div></div><div style="background:var(--card);margin:8px 11px 0;border-radius:14px;padding:14px;border:1px solid var(--br);"><div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="width:28px;height:28px;border-radius:8px;background:rgba(7,169,150,.12);display:flex;align-items:center;justify-content:center;font-size:14px;">🎯</div><div style="font-size:12px;font-weight:700;color:var(--tx);">Uses</div></div><div style="font-size:11px;color:var(--sub);line-height:1.7;" id="md-use">-</div></div><div style="background:var(--card);margin:8px 11px 0;border-radius:14px;padding:14px;border:1px solid var(--br);"><div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="width:28px;height:28px;border-radius:8px;background:rgba(37,99,235,.1);display:flex;align-items:center;justify-content:center;font-size:14px;">📏</div><div style="font-size:12px;font-weight:700;color:var(--tx);">Dosage</div></div><div style="font-size:11px;color:var(--sub);line-height:1.9;white-space:pre-line;" id="md-dose">-</div></div><div style="background:var(--card);margin:8px 11px 0;border-radius:14px;padding:14px;border:1px solid var(--br);"><div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="width:28px;height:28px;border-radius:8px;background:rgba(245,158,11,.12);display:flex;align-items:center;justify-content:center;font-size:14px;">⚠️</div><div style="font-size:12px;font-weight:700;color:var(--tx);">Side Effects</div></div><div id="md-side" style="display:flex;flex-direction:column;gap:5px;"></div></div><div style="background:rgba(229,62,62,.05);margin:8px 11px 0;border-radius:14px;padding:14px;border:1px solid rgba(229,62,62,.18);"><div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="width:28px;height:28px;border-radius:8px;background:rgba(229,62,62,.12);display:flex;align-items:center;justify-content:center;font-size:14px;">🚫</div><div style="font-size:12px;font-weight:700;color:#E53E3E;">Warnings</div></div><div style="font-size:11px;color:var(--sub);line-height:1.7;" id="md-warn">-</div></div><div style="background:var(--card);margin:8px 11px 0;border-radius:14px;padding:14px;border:1px solid var(--br);"><div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="width:28px;height:28px;border-radius:8px;background:rgba(124,58,237,.1);display:flex;align-items:center;justify-content:center;font-size:14px;">🔗</div><div style="font-size:12px;font-weight:700;color:var(--tx);">Interactions</div></div><div style="font-size:11px;color:var(--sub);line-height:1.7;" id="md-inter">-</div></div><div style="background:linear-gradient(135deg,rgba(7,169,150,.07),rgba(5,150,136,.05));margin:8px 11px 0;border-radius:14px;padding:14px;border:1px solid rgba(7,169,150,.2);"><div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;"><div style="width:28px;height:28px;border-radius:8px;background:rgba(7,169,150,.15);display:flex;align-items:center;justify-content:center;font-size:14px;">💡</div><div style="font-size:12px;font-weight:700;color:#07A996;">Tips</div></div><div style="font-size:11px;color:var(--sub);line-height:1.7;" id="md-tips">-</div></div><div style="margin:10px 11px 0;display:flex;flex-direction:column;gap:8px;"><button class="btn" id="md-rem-btn" onclick="">+ Add to Reminders</button><button onclick="medBack()" style="width:100%;background:var(--pl);color:#07A996;border:1.5px solid var(--br);border-radius:11px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">🔍 Search Another Medicine</button></div>
+</div></div><div id="s-chat" class="h"><div class="chdr"><div class="bk" onclick="go('home')">←</div><div class="cava" style="background:linear-gradient(135deg,#07A996,#059688);overflow:hidden;flex-shrink:0;"><svg width="22" height="22" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="22" r="13" fill="#fff" opacity="0.95"/><circle cx="27" cy="20" r="2" fill="#07A996"/><circle cx="37" cy="20" r="2" fill="#07A996"/><path d="M26 26 Q32 31 38 26" stroke="#07A996" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M16 55 Q16 42 32 40 Q48 42 48 55" fill="#fff" opacity="0.9"/><path d="M28 43 Q28 48 32 48 Q36 48 36 43" stroke="#07A996" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="32" cy="49" r="2.5" fill="#07A996"/><rect x="30" y="42" width="4" height="1.5" rx="0.75" fill="#E53E3E"/><rect x="31.25" y="40.75" width="1.5" height="4" rx="0.75" fill="#E53E3E"/></svg></div><div style="flex:1;"><div style="font-size:11px;font-weight:700;color:var(--tx);">AI Doctor</div><div style="font-size:8px;color:#07A996;font-weight:600;">● Online · EN / RU / UR</div></div><div onclick="clearChat()" style="background:var(--pl);border-radius:14px;padding:4px 9px;font-size:9px;font-weight:700;color:#07A996;cursor:pointer;border:1px solid var(--br);">Clear</div></div><div class="cmsgs" id="cmsgs"></div><div class="chips" id="chat-chips"></div><div class="cinprow"><input type="text" class="cinp" id="ci" placeholder="Type your message..."><button class="sndbtn" onclick="csend()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><line x1="22" y1="2" x2="11" y2="13" stroke="#fff" stroke-width="2" stroke-linecap="round"/><polygon points="22 2 15 22 11 13 2 9 22 2" stroke="#fff" stroke-width="2" fill="none"/></svg></button></div></div><div id="s-reminders" class="h"><div class="shead"><div class="bk" onclick="go('home')">←</div><div><h2>Reminders</h2><small>Never forget your medicine</small></div></div><div style="margin:11px 11px 0;display:flex;align-items:center;justify-content:space-between;"><div style="font-size:12px;font-weight:700;color:var(--tx);" id="rem-active-lbl">Active Reminders</div><div id="rem-addbtn" onclick="toggleRemForm()" style="background:linear-gradient(135deg,#07A996,#059688);color:#fff;font-size:9px;font-weight:700;padding:5px 11px;border-radius:16px;cursor:pointer;">+ Add New</div></div><div id="rem-form" class="h remform" style="margin-top:9px;"><div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:9px;">New Reminder</div><div class="fg"><label class="flbl">Medicine Name</label><input type="text" class="inp" id="r-nm" placeholder="e.g. Panadol 500mg"><div class="ferr" id="r-nm-e">Name required</div></div><div class="fg"><label class="flbl">Time</label><input type="time" class="inp" id="r-tm" value="08:00"><div class="ferr" id="r-tm-e">Time required</div></div><div class="fg"><label class="flbl">Meal Timing</label><select class="inp" id="r-wh"><option>After breakfast</option><option>After lunch</option><option>After dinner</option><option>Before sleep</option></select></div><button class="btn" onclick="addReminder()">✅ Save Reminder</button></div><div id="rem-list" style="margin:9px 11px 11px;"></div></div><div id="s-tips" class="h"><div class="shead"><div class="bk" onclick="go('home')">←</div><div><h2>Health Tips</h2><small>Daily guidance</small></div></div><div id="tips-list" style="padding:11px;display:flex;flex-direction:column;gap:7px;"></div></div><div id="s-diet" class="h"><div style="background:linear-gradient(135deg,#07A996,#059688);padding:13px 13px 16px;position:relative;overflow:hidden;"><div style="position:absolute;top:-18px;right:-18px;width:70px;height:70px;background:rgba(255,255,255,.1);border-radius:50%;"></div><div style="position:absolute;bottom:-22px;left:40%;width:55px;height:55px;background:rgba(255,255,255,.07);border-radius:50%;"></div><div style="display:flex;align-items:center;gap:9px;margin-bottom:2px;"><div class="bk" onclick="go('home')" style="background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3);color:#fff;">←</div><div style="flex:1;"><div style="font-size:15px;font-weight:800;color:#fff;letter-spacing:.2px;">Diet Plan</div><div style="font-size:9px;color:rgba(255,255,255,.82);">AI-powered weekly nutrition plan</div></div><div onclick="dietRegenerate()" style="width:30px;height:30px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;">↻</div></div></div><div style="padding:11px;padding-bottom:70px;"><div style="font-size:10px;font-weight:700;color:var(--sub);margin-bottom:8px;letter-spacing:.3px;text-transform:uppercase;">Select your goal</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;" id="diet-goal-grid"><div class="dgoalbtn" id="dg-weight" onclick="selectDietGoal('weight')"><span style="font-size:13px;">⚖️</span> Weight Loss
+      </div><div class="dgoalbtn" id="dg-muscle" onclick="selectDietGoal('muscle')"><span style="font-size:13px;">💪</span> Muscle Gain
+      </div><div class="dgoalbtn" id="dg-diabetes" onclick="selectDietGoal('diabetes')"><span style="font-size:13px;">🩺</span> Diabetes Control
+      </div><div class="dgoalbtn dgoalbtn-act" id="dg-general" onclick="selectDietGoal('general')"><span style="font-size:13px;">🌱</span> General Health
+      </div></div><div style="display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;margin-bottom:12px;padding-bottom:2px;" id="diet-day-tabs"><div class="ddaytab ddaytab-act" id="dt-0" onclick="selectDietDay(0)">Mon</div><div class="ddaytab" id="dt-1" onclick="selectDietDay(1)">Tue</div><div class="ddaytab" id="dt-2" onclick="selectDietDay(2)">Wed</div><div class="ddaytab" id="dt-3" onclick="selectDietDay(3)">Thu</div><div class="ddaytab" id="dt-4" onclick="selectDietDay(4)">Fri</div><div class="ddaytab" id="dt-5" onclick="selectDietDay(5)">Sat</div><div class="ddaytab" id="dt-6" onclick="selectDietDay(6)">Sun</div></div><div id="diet-meal-cards" style="display:flex;flex-direction:column;gap:9px;"></div><button onclick="dietRegenerate()" style="width:100%;margin-top:14px;padding:12px;border-radius:13px;border:2px solid rgba(7,169,150,.35);background:transparent;color:#07A996;font-size:12px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;" id="diet-regen-btn">
+      ↻ Regenerate Plan
+    </button></div></div><div id="s-profile" class="h"><div class="shead"><div class="bk" onclick="go('home')">←</div><div><h2>My Profile</h2><small>Your health stats</small></div><button onclick="toast('✏️ Edit profile!')" style="margin-left:auto;background:var(--pl);color:#07A996;border:1px solid var(--br);border-radius:14px;padding:4px 10px;font-size:9px;font-weight:700;cursor:pointer;font-family:inherit;">Edit</button></div><div class="card" style="margin:11px 11px 0;text-align:center;transition:background .3s,border .3s;" id="profile-card"><div style="position:relative;width:56px;margin:0 auto 9px;cursor:pointer;" onclick="toast('📷 Photo upload!')"><div class="pav">👤</div><div style="position:absolute;bottom:0;right:0;width:18px;height:18px;background:#07A996;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;border:2px solid var(--card);">📷</div></div><div class="pnm" id="pnm">Rizwan Bhai</div><div class="peml">rizwan@gmail.com · Pakistan</div><div class="pstats"><div class="pst"><div class="pstv">47</div><div class="pstl">Scans</div></div><div class="pst"><div class="pstv" id="pst-rem">4</div><div class="pstl">Reminders</div></div><div class="pst"><div class="pstv">23</div><div class="pstl">Days</div></div><div class="pst"><div class="pstv">1240</div><div class="pstl">Cal</div></div></div><div class="prow"><span class="prowl">Age</span><span class="prowv">28 years</span></div><div class="prow"><span class="prowl">Weight</span><span class="prowv">72 kg</span></div><div class="prow"><span class="prowl">Height</span><span class="prowv">5'9"</span></div><div class="prow"><span class="prowl">Blood Group</span><span class="prowv">B+</span></div><div class="prow"><span class="prowl">BMI</span><span class="prowv" style="color:#07A996;">23.4 ✓</span></div></div><div style="margin:11px 11px 6px;display:flex;align-items:center;justify-content:space-between;"><div style="font-size:12px;font-weight:700;color:var(--tx);">Family Members</div><div onclick="openFamModal()" style="background:linear-gradient(135deg,#07A996,#059688);color:#fff;font-size:9px;font-weight:700;padding:5px 10px;border-radius:14px;cursor:pointer;">+ Add</div></div><div id="fam-list" style="margin:0 11px 70px;display:flex;flex-direction:column;gap:7px;"><div style="text-align:center;padding:14px;background:var(--pl);border-radius:12px;border:1px solid var(--br);font-size:10px;color:var(--tx);">No family members added yet</div></div></div><div id="fam-modal" class="mov h"><div class="mbox" style="border-radius:20px 20px 0 0;padding:16px 16px 24px;max-height:88%;overflow-y:auto;"><div class="mtit" id="fam-modal-title">👨‍👩‍👧 Add Family Member <div class="mcls" onclick="closeFamModal()">✕</div></div><div style="display:flex;flex-direction:column;align-items:center;margin-bottom:14px;"><div style="position:relative;width:62px;height:62px;margin-bottom:8px;"><div id="fam-av-preview" style="width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;border:3px solid var(--br);overflow:hidden;background:#07A996;"><img id="fam-av-img" src="" style="display:none;width:100%;height:100%;object-fit:cover;"><span id="fam-av-init">?</span></div><div onclick="document.getElementById('fam-photo-inp').click()" style="position:absolute;bottom:0;right:-4px;width:22px;height:22px;background:#07A996;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid var(--card);font-size:10px;z-index:10;">📷</div></div><input type="file" id="fam-photo-inp" accept="image/*" style="display:none;" onchange="famPhotoUpload(this)"><div style="font-size:9px;font-weight:700;color:var(--sub);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px;">Avatar Color</div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;" id="fam-color-row"><div onclick="setFamColor('#4361EE')" style="width:26px;height:26px;border-radius:50%;background:#4361EE;cursor:pointer;border:3px solid #000;"></div><div onclick="setFamColor('#07A996')" style="width:26px;height:26px;border-radius:50%;background:#07A996;cursor:pointer;border:3px solid transparent;"></div><div onclick="setFamColor('#7C3AED')" style="width:26px;height:26px;border-radius:50%;background:#7C3AED;cursor:pointer;border:3px solid transparent;"></div><div onclick="setFamColor('#F59E0B')" style="width:26px;height:26px;border-radius:50%;background:#F59E0B;cursor:pointer;border:3px solid transparent;"></div><div onclick="setFamColor('#E53E3E')" style="width:26px;height:26px;border-radius:50%;background:#E53E3E;cursor:pointer;border:3px solid transparent;"></div><div onclick="setFamColor('#EC4899')" style="width:26px;height:26px;border-radius:50%;background:#EC4899;cursor:pointer;border:3px solid transparent;"></div><div onclick="setFamColor('#06B6D4')" style="width:26px;height:26px;border-radius:50%;background:#06B6D4;cursor:pointer;border:3px solid transparent;"></div><div onclick="setFamColor('#84CC16')" style="width:26px;height:26px;border-radius:50%;background:#84CC16;cursor:pointer;border:3px solid transparent;"></div></div></div><div class="fg"><label class="flbl">Name *</label><input type="text" class="inp" id="fm-name" placeholder="e.g. Ali Khan" oninput="updateFamInitial(this.value)"><div class="ferr" id="fm-name-e">Name required</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div class="fg"><label class="flbl">Relation</label><select class="inp" id="fm-rel"><option>Me</option><option>Husband</option><option>Wife</option><option>Father</option><option>Mother</option><option>Son</option><option>Daughter</option><option>Brother</option><option>Sister</option><option>Other</option></select></div><div class="fg"><label class="flbl">Age</label><input type="number" class="inp" id="fm-age" placeholder="e.g. 8" min="0" max="120"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div class="fg"><label class="flbl">Gender</label><select class="inp" id="fm-gender"><option>Male</option><option>Female</option><option>Other</option></select></div><div class="fg"><label class="flbl">Blood Type</label><select class="inp" id="fm-blood"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>O+</option><option>O-</option><option>AB+</option><option>AB-</option><option>Unknown</option></select></div></div><div class="fg"><label class="flbl">Allergies <span style="font-weight:400;text-transform:none;">(comma separated)</span></label><input type="text" class="inp" id="fm-allergy" placeholder="e.g. Penicillin, Dust"></div><div class="fg"><label class="flbl">Chronic Conditions <span style="font-weight:400;text-transform:none;">(comma separated)</span></label><input type="text" class="inp" id="fm-conditions" placeholder="e.g. Asthma, Diabetes"></div><div class="fg"><label class="flbl">Current Medications <span style="font-weight:400;text-transform:none;">(comma separated)</span></label><input type="text" class="inp" id="fm-meds" placeholder="e.g. Salbutamol inhaler"></div><button class="btn" onclick="saveFamMember()" style="margin-top:4px;" id="fm-save-btn">✅ Save Member</button></div></div><div id="fam-detail-modal" class="mov h"><div class="mbox" style="border-radius:20px 20px 0 0;padding:16px 16px 28px;max-height:90%;overflow-y:auto;"><div class="mtit" id="fam-detail-title">Member Details <div class="mcls" onclick="closeModal('fam-detail-modal')">✕</div></div><div style="display:flex;align-items:center;gap:10px;background:var(--pl);border-radius:13px;padding:11px;margin-bottom:13px;border:1px solid var(--br);"><div id="fd-av" style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;flex-shrink:0;overflow:hidden;background:#07A996;"></div><div style="flex:1;"><div id="fd-name" style="font-size:13px;font-weight:800;color:var(--tx);"></div><div id="fd-info" style="font-size:10px;color:var(--sub);"></div></div><div onclick="editFamMember()" style="background:var(--pl);border:1px solid var(--br);border-radius:10px;padding:4px 9px;font-size:9px;font-weight:700;color:#07A996;cursor:pointer;">Edit ✏️</div></div><div id="fd-health" style="margin-bottom:13px;"></div><div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:8px;">💊 Medicine Reminders</div><div id="fd-rem-list" style="margin-bottom:10px;display:flex;flex-direction:column;gap:6px;"></div><div style="background:var(--pl);border-radius:13px;padding:12px;border:1px solid var(--br);"><div style="font-size:10px;font-weight:700;color:#07A996;margin-bottom:10px;">➕ Add New Reminder</div><div class="fg"><label class="flbl">Medicine Name *</label><input type="text" class="inp" id="fd-rem-name" placeholder="e.g. Panadol 500mg"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;"><div class="fg"><label class="flbl">Time *</label><input type="time" class="inp" id="fd-rem-time" value="08:00"></div><div class="fg"><label class="flbl">Dose</label><input type="text" class="inp" id="fd-rem-dose" placeholder="e.g. 1 tab"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;"><div class="fg"><label class="flbl">Duration (days)</label><input type="number" class="inp" id="fd-rem-days" placeholder="e.g. 7" min="1"></div><div class="fg"><label class="flbl">Meal Timing</label><select class="inp" id="fd-rem-when"><option>After breakfast</option><option>After lunch</option><option>After dinner</option><option>Before sleep</option><option>Empty stomach</option></select></div></div><div class="fg"><label class="flbl">Start Date</label><input type="date" class="inp" id="fd-rem-date"></div><div class="fg"><label class="flbl">Notes (optional)</label><input type="text" class="inp" id="fd-rem-notes" placeholder="e.g. With water only"></div><button class="btn" onclick="addFamReminder()" style="margin-top:2px;">⏰ Set Reminder</button></div></div></div><div id="s-settings" class="h"><div class="shead" style="background:linear-gradient(135deg,#07A996,#059688);"><div class="bk" onclick="go('home')" style="background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3);color:#fff;">←</div><div><h2 style="color:#fff;">Settings</h2><small style="color:rgba(255,255,255,.8);">Manage account</small></div></div><div style="padding-bottom:60px;"><div class="sprof"><div style="position:relative;flex-shrink:0;"><div class="spav" id="sp-av" style="overflow:hidden;"><img id="sp-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;"><span id="sp-initials">RB</span></div><div onclick="document.getElementById('sp-img-inp').click()" style="position:absolute;bottom:-2px;right:-2px;width:18px;height:18px;background:#07A996;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid #fff;font-size:9px;z-index:10;" title="Upload photo">📷</div><input type="file" id="sp-img-inp" accept="image/*" style="display:none;" onchange="uploadSpImg(this)"></div><div style="flex:1;"><div class="spnm" id="sp-nm">Rizwan Ahmed</div><div class="speml">rizwan@gmail.com</div><button class="spedit" onclick="toast('✏️ Edit!')">Edit Profile</button></div></div><div class="sstatrow"><div class="sstatc"><div class="sstatv">47</div><div class="sstatl">Scans Done</div></div><div class="sstatc"><div class="sstatv" id="st-rem">4</div><div class="sstatl">Reminders</div></div><div class="sstatc"><div class="sstatv">23</div><div class="sstatl">Days Active</div></div></div><div class="ssec"><div class="shdr">Notifications</div><div class="scard"><div class="rrow"><div class="rico" style="background:var(--rico-notif);">🔔</div><div style="flex:1;"><div class="rtit">Push Notifications</div><div class="rsub">Get important alerts</div></div><div class="tgl on" onclick="stg(this)"><div class="tglk"></div></div></div><div class="rrow"><div class="rico" style="background:var(--pl);">💊</div><div style="flex:1;"><div class="rtit">Medication Reminders</div><div class="rsub">Daily dose alerts</div></div><div class="tgl on" onclick="stg(this)"><div class="tglk"></div></div></div><div class="rrow"><div class="rico" style="background:var(--rico-food);">🍽️</div><div style="flex:1;"><div class="rtit">Food Scan Alerts</div><div class="rsub">Nutrition updates</div></div><div class="tgl off" onclick="stg(this)"><div class="tglk"></div></div></div></div></div><div class="ssec"><div class="shdr">Appearance</div><div class="scard"><div class="rrow"><div class="rico" id="dk-ico" style="background:var(--pl);">🌙</div><div style="flex:1;"><div class="rtit">Dark Mode</div><div class="rsub" id="dk-sub">Switch to dark theme</div></div><div class="tgl off" id="dk-tgl" onclick="toggleDark()"><div class="tglk"></div></div></div><div class="rrow" onclick="showModal('lang-modal')"><div class="rico" style="background:var(--rico-lang);">🌐</div><div style="flex:1;"><div class="rtit">Language</div><div class="rsub" id="lang-cur">English 🇬🇧 selected</div></div><div class="chev">›</div></div></div></div><div class="ssec"><div class="shdr">Support</div><div class="scard"><div class="rrow" onclick="showModal('help-modal')"><div class="rico" style="background:var(--rico-help);">❓</div><div style="flex:1;"><div class="rtit">Help Center</div><div class="rsub">FAQ and guides</div></div><div class="chev">›</div></div><div class="rrow" onclick="showModal('rate-modal')"><div class="rico" style="background:var(--rico-star);">⭐</div><div style="flex:1;"><div class="rtit">Rate RxScan</div><div class="rsub">Share your experience</div></div><div class="chev">›</div></div></div></div><div style="margin:18px 11px 16px;text-align:center;"><button onclick="showModal('logout-modal')" style="background:linear-gradient(135deg,#E53E3E,#C53030);color:#fff;border:none;border-radius:14px;padding:12px 40px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(229,62,62,.3);display:inline-flex;align-items:center;gap:7px;">🚪 Logout</button><div style="font-size:9px;color:var(--sub);margin-top:7px;">Sign out of RxScan</div></div></div></div></div><div class="bnav" id="bnav" style="display:none;"><div class="ni act" id="n0" onclick="go('home');sn(0)"><svg viewBox="0 0 24 24" fill="none"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z" stroke="#07A996" stroke-width="2" fill="rgba(7,169,150,.1)"/><path d="M9 21V12h6v9" stroke="#07A996" stroke-width="2"/></svg><span id="nv0">HOME</span></div><div class="ni" id="n1" onclick="go('scanner');sn(1)"><svg viewBox="0 0 24 24" fill="none"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="#8AACAC" stroke-width="2"/><circle cx="12" cy="13" r="4" stroke="#8AACAC" stroke-width="2"/></svg><span id="nv1">SCAN</span></div><div class="ni" id="n2" onclick="go('medicine');sn(2)"><div class="ncc"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="#fff" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></div><span id="nv2">SEARCH</span></div><div class="ni" id="n3" onclick="go('chat');sn(3)"><svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#8AACAC" stroke-width="2"/></svg><span id="nv3">CHAT</span></div><div class="ni" id="n4" onclick="go('settings');sn(4)"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#8AACAC" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="#8AACAC" stroke-width="2"/></svg><span id="nv4">SETTINGS</span></div></div><div class="toast" id="toast"></div><div id="forgot-modal" class="mov h"><div class="mbox"><div class="mtit">🔐 Forgot Password? <div class="mcls" onclick="closeModal('forgot-modal')">✕</div></div><p style="font-size:10px;color:var(--sub);margin-bottom:10px;">Enter your email — we'll send a reset link.</p><div class="fg"><label class="flbl">Email</label><input type="email" class="linp" id="fgt-em" placeholder="you@example.com" style="background:#fff!important;color:#1A3A3A!important;"><div class="ferr" id="fgt-em-e">Enter valid email</div></div><button class="btn" onclick="doForgot()">📧 Send Reset Link</button></div></div><div id="google-modal" class="mov h"><div class="mbox"><div class="mtit">Choose an account <div class="mcls" onclick="closeModal('google-modal')">✕</div></div><p style="font-size:10px;color:var(--sub);margin-bottom:10px;">to continue to RxScan</p><div onclick="googleSignIn()" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1.5px solid rgba(7,169,150,.2);background:var(--pl);cursor:pointer;margin-bottom:10px;"><div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#4285F4,#34A853);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;">R</div><div style="flex:1;"><div style="font-size:12px;font-weight:700;color:var(--tx);">Rizwan Ahmed</div><div style="font-size:10px;color:var(--sub);">rizwan.ahmed@gmail.com</div></div><div style="color:#07A996;font-size:14px;">›</div></div><button class="btn" onclick="googleSignIn()">Sign in as Rizwan Ahmed</button></div></div><div id="lang-modal" class="mov h"><div class="mbox"><div class="mtit">🌐 Language <div class="mcls" onclick="closeModal('lang-modal')">✕</div></div><div class="mopt" onclick="setLang('en')"><div style="display:flex;align-items:center;gap:9px;"><span style="font-size:18px;">🇬🇧</span><div><div class="moptlbl">English</div><div style="font-size:9px;color:var(--sub);">Default</div></div></div><div id="lchk-en" style="width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;background:#07A996;color:#fff;">✓</div></div><div class="mopt" onclick="setLang('ru')" style="opacity:.4;pointer-events:none;"><div style="display:flex;align-items:center;gap:9px;"><span style="font-size:18px;">🇵🇰</span><div><div class="moptlbl">Roman Urdu</div><div style="font-size:9px;color:var(--sub);">آسان اردو</div></div></div><div id="lchk-ru" style="width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;"></div></div><div class="mopt" onclick="setLang('ur')" style="opacity:.4;pointer-events:none;"><div style="display:flex;align-items:center;gap:9px;"><span style="font-size:18px;">🇵🇰</span><div><div class="moptlbl">اردو</div><div style="font-size:9px;color:var(--sub);">خالص اردو</div></div></div><div id="lchk-ur" style="width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;"></div></div></div></div><div id="help-modal" class="mov h"><div class="mbox" style="max-height:80%;"><div class="mtit">❓ Help Center <div class="mcls" onclick="closeModal('help-modal')">✕</div></div><div style="display:flex;flex-direction:column;gap:8px;"><div style="background:var(--pl);border-radius:11px;padding:11px 13px;border:1px solid var(--br);"><div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:3px;">📋 Parchi/Prescription kaise scan karein?</div><div style="font-size:10px;color:var(--sub);line-height:1.6;">Home screen pe "Parchi Scan" tap karein → Camera ya Gallery select karein → Prescription ki clear photo lo → AI automatically parhega.</div></div><div style="background:var(--pl);border-radius:11px;padding:11px 13px;border:1px solid var(--br);"><div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:3px;">💊 Reminder kaise add karein?</div><div style="font-size:10px;color:var(--sub);line-height:1.6;">Reminders screen mein jao → "+ Add New" tap karein → Medicine name, time aur meal timing fill karein → Save karein.</div></div><div style="background:var(--pl);border-radius:11px;padding:11px 13px;border:1px solid var(--br);"><div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:3px;">🍽️ Food calories kaise check karein?</div><div style="font-size:10px;color:var(--sub);line-height:1.6;">Food Scanner open karein → "Scan Now" tap karein → Khane ki photo lo → AI calories aur nutrition show karega.</div></div><div style="background:var(--pl);border-radius:11px;padding:11px 13px;border:1px solid var(--br);"><div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:3px;">🌐 Language kaise change karein?</div><div style="font-size:10px;color:var(--sub);line-height:1.6;">Settings → Appearance → Language tap karein → English, Roman Urdu, ya Urdu mein se chunein.</div></div><div style="background:var(--pl);border-radius:11px;padding:11px 13px;border:1px solid var(--br);"><div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:3px;">📧 Support se rabta karein</div><div style="font-size:10px;color:var(--sub);line-height:1.6;">Koi masla ho toh: <span style="color:#07A996;font-weight:700;">support@rxscan.pk</span> par email karein. Hum 24 ghante mein jawab denge!</div></div></div></div></div><div id="rate-modal" class="mov cnt h"><div class="mbox cb" style="text-align:center;padding:20px;"><div style="font-size:36px;margin-bottom:6px;">⭐</div><div style="font-size:14px;font-weight:800;color:var(--tx);margin-bottom:4px;">Rate RxScan</div><div style="font-size:10px;color:var(--sub);margin-bottom:16px;">Aapka tajruba kaisa raha? Hume batayein!</div><div id="rate-stars" style="display:flex;justify-content:center;gap:8px;margin-bottom:14px;"><span onclick="setRating(1)" style="font-size:30px;cursor:pointer;transition:transform .2s;" id="rs1">☆</span><span onclick="setRating(2)" style="font-size:30px;cursor:pointer;transition:transform .2s;" id="rs2">☆</span><span onclick="setRating(3)" style="font-size:30px;cursor:pointer;transition:transform .2s;" id="rs3">☆</span><span onclick="setRating(4)" style="font-size:30px;cursor:pointer;transition:transform .2s;" id="rs4">☆</span><span onclick="setRating(5)" style="font-size:30px;cursor:pointer;transition:transform .2s;" id="rs5">☆</span></div><div id="rate-label" style="font-size:11px;font-weight:600;color:#07A996;margin-bottom:12px;min-height:18px;"></div><textarea id="rate-feedback" placeholder="Koi suggestion? (optional)" style="width:100%;border:1.5px solid rgba(7,169,150,.3);border-radius:10px;padding:8px 10px;font-size:11px;font-family:inherit;color:var(--inptx);background:var(--inp);outline:none;resize:none;min-height:60px;margin-bottom:12px;"></textarea><div style="display:flex;gap:8px;"><button onclick="closeModal('rate-modal')" style="flex:1;background:var(--pl);color:#07A996;border:none;border-radius:10px;padding:10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button><button onclick="submitRating()" style="flex:1;background:linear-gradient(90deg,#07A996,#059688);color:#fff;border:none;border-radius:10px;padding:10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">Submit ⭐</button></div></div></div><div id="apikey-modal" class="mov cnt h"><div class="mbox cb" style="padding:20px;border-radius:18px;"><div style="font-size:28px;text-align:center;margin-bottom:8px;">🔑</div><div style="font-size:13px;font-weight:800;color:var(--tx);margin-bottom:5px;text-align:center;">Gemini API Key (Free)</div><div style="font-size:10px;color:var(--sub);margin-bottom:4px;text-align:center;line-height:1.7;">1. <b>aistudio.google.com</b> kholen<br>2. Google account se login karein<br>3. "Get API Key" → "Create API key"<br>4. Key copy karke yahan paste karein</div><div style="background:rgba(7,169,150,.08);border-radius:10px;padding:7px;margin-bottom:10px;text-align:center;"><div style="font-size:9px;color:#07A996;font-weight:700;">✅ Bilkul FREE — 1500 scans/day</div></div><input type="text" id="apikey-inp" class="inp" placeholder="AIza..." style="margin-bottom:10px;font-size:11px;"><button class="btn" onclick="saveApiKey()" style="margin-bottom:8px;">✅ Save &amp; Scan Karein</button><div style="font-size:9px;color:var(--sub);text-align:center;">Key sirf aapke phone par save hogi</div></div></div><div id="fam-del-modal" class="mov cnt h"><div class="mbox cb" style="text-align:center;padding:20px;border-radius:18px;"><div style="font-size:32px;margin-bottom:8px;">&#128465;</div><div style="font-size:13px;font-weight:800;color:var(--tx);margin-bottom:6px;">Delete Member?</div><div id="fam-del-msg" style="font-size:11px;color:var(--sub);margin-bottom:16px;"></div><div style="display:flex;gap:8px;"><button onclick="closeModal('fam-del-modal')" style="flex:1;background:var(--pl);color:#07A996;border:none;border-radius:10px;padding:10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button><button onclick="confirmFamDelete()" style="flex:1;background:linear-gradient(90deg,#E53E3E,#C53030);color:#fff;border:none;border-radius:10px;padding:10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">Delete</button></div></div></div>
+<div id="logout-modal" class="mov cnt h"><div class="mbox cb" style="text-align:center;padding:18px;"><div style="font-size:30px;margin-bottom:7px;">👋</div><div style="font-size:13px;font-weight:800;color:var(--tx);margin-bottom:4px;">Logout Karein?</div><div style="font-size:10px;color:var(--sub);margin-bottom:13px;">Kya sach mein logout karna chahte hain?</div><div style="display:flex;gap:8px;"><button onclick="closeModal('logout-modal')" style="flex:1;background:var(--pl);color:#07A996;border:none;border-radius:10px;padding:10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">Cancel</button><button onclick="closeModal('logout-modal');go('splash')" style="flex:1;background:linear-gradient(90deg,#E53E3E,#C53030);color:#fff;border:none;border-radius:10px;padding:10px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">Logout</button></div></div></div></div></div>
+<script>
+var curLang='en',isDark=false,wc=0,wGoal=8,obIdx=0,remFormOpen=false,chatInited=false;
+var userData={name:'Rizwan Bhai'};
+var LANG={
+  en:{gm:'Good Morning',ga:'Good Afternoon',ge:'Good Evening',gn:'Good Night',c1:'🤕 Headache',c2:'🌡️ Fever',c3:'😷 Cough',c4:'🤢 Stomach',c5:'😴 Sleep',
+    ai:'Assalam o Alaikum! 👋 I am your AI Doctor.\n\nAsk me about:\n• Symptoms\n• Medicine info\n• Health tips\n• Diet advice',
+    ah:'For headache:\n• Panadol 500mg\n• Rest in quiet dark room\n• Drink water\n• 2 days — see doctor 🏥',
+    af:'For fever:\n• Panadol 500mg every 6 hrs\n• Drink 8+ glasses water\n• Above 103°F — doctor urgently! 🚨',
+    ac:'For cough:\n• Warm water + honey + ginger\n• Avoid cold drinks 🏥',
+    as:'For stomach:\n• Flagyl 400mg\n• ORS if diarrhea\n• Avoid spicy food 💊',
+    asl:'For sleep:\n• No phone 1hr before bed\n• Cool dark room 🍵',
+    ad:'Rest well and drink water. If symptoms persist — see doctor 🏥',
+    nv:['HOME','SCAN','SEARCH','CHAT','SETTINGS'],lname:'English 🇬🇧',
+    splash_sub:'Your Health, Our Priority',splash_tagline:'Aapki sehat, hamari zimmedari',
+    ob1t:'Scan Instantly',ob1d:'Scan any medicine or food — complete info in seconds, bilkul free!',
+    ob2t:'Track Nutrition',ob2d:'Log daily meals, count calories, and build a healthier lifestyle!',
+    ob3t:'Never Miss a Dose',ob3d:'Smart reminders — RxScan will always remind you on time!',
+    home_sub:'Pakistan\'s #1 Health App — Your health, our responsibility',
+    tips_banner_title:'💡 Smart Health Tips',tips_banner_sub:'New tips every day',
+    quick_actions:'Quick Actions',
+    qa_scan:'Parchi Scan',qa_scan_sub:'Scan prescriptions',
+    qa_ai:'AI Doctor',qa_ai_sub:'Chat with AI doctor',
+    qa_food:'Food Scanner',qa_food_sub:'Scan food calories',
+    qa_rem:'Reminders',qa_rem_sub:'Medicine reminders',
+    qa_med:'Medicine Search',qa_med_sub:'AI drug information',
+    smart_tips:'Smart Tips',
+    water_title:'Water Tracking',water_intake:'💧 Water Intake',water_goal_lbl:'glasses goal',water_save:'Save',
+    water_achievement_title:'Daily Goal Complete!',water_achievement_btn:'Thank You! ✨',
+    diet_plan:'Diet Plan',diet_sub:'AI meal planner',
+    family:'Family Members',family_sub:'3 members',
+    scan_title:'Parchi Scanner',scan_sub:'AI prescription reader',
+    scan_prompt:'Scan your prescription here',scan_tap:'Tap to scan',
+    scan_camera:'Camera',scan_camera_sub:'Live photo',scan_gallery:'Gallery',scan_gallery_sub:'Upload photo',
+    scan_recent:'Recent Scans',
+    food_title:'Food Scanner',food_sub:'AI nutrition analyzer',
+    food_heading:'Food Calorie Scanner',food_heading_sub:'Take a photo of your food — find out the calories',
+    food_scan_btn:'📷 Scan Now',food_log:'Food Log',
+    med_title:'Medicine Search',med_sub:'AI drug database',
+    med_placeholder:'Type medicine name...',med_popular:'Popular Medicines',
+    med_use:'Use',med_dose:'Dosage',med_side:'Side Effects',med_price:'Price (PKR)',
+    med_add_rem:'+ Add to Reminders',
+    chat_name:'AI Doctor',chat_status:'● Online · EN / RU / UR',chat_clear:'Clear',
+    rem_title:'Reminders',rem_sub:'Never forget your medicine',
+    rem_active:'Active Reminders',rem_add:'+ Add New',rem_cancel:'✕ Cancel',
+    rem_new:'New Reminder',rem_med_lbl:'Medicine Name',rem_med_ph:'e.g. Panadol 500mg',
+    rem_name_err:'Name required',rem_time_lbl:'Time',rem_time_err:'Time required',
+    rem_meal_lbl:'Meal Timing',
+    rem_opt1:'After breakfast',rem_opt2:'After lunch',rem_opt3:'After dinner',rem_opt4:'Before sleep',
+    rem_save:'✅ Save Reminder',rem_empty:'No reminders yet',
+    tips_title:'Health Tips',tips_sub:'Daily guidance',tips_lbl:'Health Tip',
+    diet_title:'Diet Plan',diet_ai_sub:'7 days · AI Pakistani meals',
+    prof_title:'My Profile',prof_edit:'Edit',prof_email:'rizwan@gmail.com · Pakistan',
+    prof_scans:'Scans',prof_rems:'Reminders',prof_days:'Days',prof_cal:'Cal',
+    prof_age:'Age',prof_age_val:'28 years',
+    prof_weight:'Weight',prof_weight_val:'72 kg',
+    prof_height:'Height',prof_height_val:'5\'9"',
+    prof_blood:'Blood Group',prof_blood_val:'B+',
+    prof_bmi:'BMI',
+    prof_family:'Family Members',prof_fam_add:'+ Add',prof_fam_empty:'No family members added yet',
+    set_title:'Settings',set_sub:'Manage account',
+    set_edit:'Edit Profile',
+    set_scans:'Scans Done',set_rems:'Reminders',set_days:'Days Active',
+    set_notif:'Notifications',set_push:'Push Notifications',set_push_sub:'Get important alerts',
+    set_medrem:'Medication Reminders',set_medrem_sub:'Daily dose alerts',
+    set_foodalert:'Food Scan Alerts',set_foodalert_sub:'Nutrition updates',
+    set_appear:'Appearance',set_dark:'Dark Mode',set_dark_sub:'Switch to dark theme',set_dark_on:'Dark mode is ON',
+    set_lang:'Language',
+    set_support:'Support',set_help:'Help Center',set_help_sub:'FAQ and guides',
+    set_rate:'Rate RxScan',set_rate_sub:'Share your experience',
+    set_account:'Account',set_logout_lbl:'Logout',set_logout_sub:'Sign out of RxScan',
+    logout_title:'Logout?',logout_msg:'Are you sure you want to logout?',logout_cancel:'Cancel',logout_confirm:'Logout',
+    wt_glasses:' glasses',
+    bell_toast:'🔔 3 reminders!',
+    tips_data:[
+      {e:'🍎',t:'An apple a day keeps the doctor away.'},
+      {e:'💧',t:'Drink 8 glasses of water every day.'},
+      {e:'🏃',t:'30 min walk daily boosts immunity.'},
+      {e:'😴',t:'7-8 hours sleep for a sharp mind.'},
+      {e:'🥦',t:'Eat green vegetables daily.'},
+      {e:'🧘',t:'5 min deep breathing reduces stress.'},
+      {e:'☀️',t:'15-20 min sunlight gives Vitamin D.'},
+      {e:'🤲',t:'Handwashing prevents 80% of illness.'}
+    ]
+  },
+};
+function T(k){return(LANG[curLang]&&LANG[curLang][k])||LANG.en[k]||k;}
+
+var reminders=[
+  {name:'Panadol 500mg',time:'08:00',when:'After breakfast',on:true},
+  {name:'Augmentin 625mg',time:'14:00',when:'After lunch',on:true},
+  {name:'Vitamin D3',time:'21:00',when:'Before sleep',on:false},
+  {name:'Water Reminder',time:'Every 2hrs',when:'Throughout day',on:true}
+];
+function getTipsData(){return T('tips_data')||[{e:'🍎',t:'An apple a day keeps the doctor away.'},{e:'💧',t:'Drink 8 glasses of water every day.'},{e:'🏃',t:'30 min walk daily boosts immunity.'},{e:'😴',t:'7-8 hours sleep for sharp mind.'},{e:'🥦',t:'Eat green vegetables daily.'},{e:'🧘',t:'5 min deep breathing reduces stress.'},{e:'☀️',t:'15-20 min sunlight for Vitamin D.'},{e:'🤲',t:'Handwashing prevents 80% of illness.'}];}
+var tipsData=getTipsData();
+var medDB={
+panadol:{name:'Panadol 500mg',type:'Painkiller / Antipyretic',use:'Used to relieve mild to moderate pain including headache, toothache, and muscle pain. Also effectively reduces fever in adults and children.',dose:'Adults: 1–2 tablets every 4–6 hours (max 8/day)\nChildren (6–12): Half tablet every 4–6 hours\nAlways take with a full glass of water.',side:'Nausea (rare)\nSkin rash in sensitive individuals\nLiver damage if overdosed — never exceed 8 tablets/day',warnings:'Do not use if you have liver disease or drink alcohol regularly. Avoid taking with other paracetamol-containing products.',interactions:'Can interact with warfarin (blood thinner). Avoid alcohol while taking this medicine.',tips:'Take after food to avoid stomach upset. Do not crush or chew — swallow whole. Store below 25°C.',price:'Rs. 25–30 / strip'},
+augmentin:{name:'Augmentin 625mg',type:'Antibiotic',use:'Treats bacterial infections of the chest, ears, sinuses, urinary tract, and skin. Contains Amoxicillin + Clavulanic Acid for broad-spectrum coverage.',dose:'Adults: 1 tablet twice daily (every 12 hours)\nTake at the start of a meal to reduce stomach upset.\nComplete the full course even if you feel better.',side:'Diarrhea or loose stools (common)\nNausea or vomiting\nSkin rash — stop if severe rash develops',warnings:'Do not use if allergic to penicillin or cephalosporins. Tell your doctor if you have liver or kidney disease.',interactions:'May reduce effectiveness of oral contraceptives. Avoid with methotrexate.',tips:'Take with food to reduce stomach issues. Never skip doses. Do not share antibiotics with others.',price:'Rs. 180–220 / strip'},
+brufen:{name:'Brufen 400mg',type:'Anti-inflammatory / Painkiller',use:'Relieves pain, reduces inflammation, and lowers fever. Commonly used for arthritis, dental pain, menstrual cramps, and sports injuries.',dose:'Adults: 1 tablet 3 times daily after food\nDo not take on an empty stomach.\nMax dose: 1200mg per day (3 tablets).',side:'Stomach pain or indigestion\nNausea, heartburn\nLong-term use may affect kidneys or cause ulcers',warnings:'Avoid if you have stomach ulcers, kidney problems, or heart disease. Not recommended in last trimester of pregnancy.',interactions:'Avoid with aspirin, blood thinners, or other NSAIDs. Can raise blood pressure with antihypertensives.',tips:'Always take with food or milk. Drink plenty of water. Use the lowest effective dose for shortest time.',price:'Rs. 40–50 / strip'},
+flagyl:{name:'Flagyl 400mg',type:'Antibiotic / Antiprotozoal',use:'Treats stomach and intestinal infections, amoeba, and giardia. Also used for dental and gynaecological infections.',dose:'Adults: 1 tablet 3 times daily for 5–7 days\nChildren: Dose based on weight — consult doctor.\nTake with or after food.',side:'Metallic or bitter taste in mouth (very common)\nNausea, stomach cramps\nDizziness or headache',warnings:'Do not drink alcohol during treatment and for 48 hours after — can cause severe reaction (vomiting, flushing).',interactions:'Avoid alcohol strictly. Can interact with warfarin and lithium.',tips:'Take at evenly spaced intervals. Complete the full course. Avoid alcohol completely during treatment.',price:'Rs. 30–40 / strip'},
+ors:{name:'ORS Sachet',type:'Oral Rehydration Salt',use:'Restores fluid and electrolyte balance lost during diarrhea, vomiting, or excessive sweating. Safe for all ages including infants.',dose:'Adults: 1 sachet dissolved in 1 litre of clean water — sip frequently\nInfants: Give small sips after every loose stool\nDo not add sugar or other flavours.',side:'None when used correctly\nOveruse may cause high sodium levels in infants',warnings:'Use clean/boiled water only. Discard unused solution after 24 hours. Seek doctor if diarrhea lasts more than 2 days.',interactions:'No significant drug interactions. Safe with all medications.',tips:'Keep sipping slowly throughout the day. Do not boil ORS solution after mixing. Eat soft food alongside rehydration.',price:'Rs. 10–15 / sachet'},
+disprin:{name:'Disprin 300mg',type:'Analgesic / Blood Thinner',use:'Relieves mild to moderate pain, reduces fever, and used in low doses to prevent blood clots and heart attacks.',dose:'Pain/Fever: 1–2 tablets every 4–6 hours (dissolve in water)\nHeart protection: 1 tablet (75–100mg) daily — as prescribed.\nDo not give to children under 16.',side:'Stomach irritation or bleeding\nNausea\nRinging in ears with high doses',warnings:'Not for children under 16 (Reye syndrome risk). Avoid with stomach ulcers, bleeding disorders, or asthma.',interactions:'Avoid with other blood thinners, ibuprofen, or high-dose vitamin E. Increases bleeding risk with anticoagulants.',tips:'Always dissolve in water before drinking. Take with food. Tell your dentist/surgeon you take aspirin before any procedure.',price:'Rs. 20–25 / strip'}
+};
+var dietData=[{day:'Monday',total:1350,meals:[{n:'Breakfast',f:'Anda Paratha + Chai',c:380},{n:'Lunch',f:'Daal Chawal + Salad',c:520},{n:'Dinner',f:'Roti + Sabzi',c:450}]},{day:'Tuesday',total:1380,meals:[{n:'Breakfast',f:'Doodh + Corn Flakes',c:320},{n:'Lunch',f:'Chicken Karahi + Naan',c:580},{n:'Dinner',f:'Daal Maash + Rice',c:480}]},{day:'Wednesday',total:1420,meals:[{n:'Breakfast',f:'Paratha + Lassi',c:420},{n:'Lunch',f:'Biryani',c:650},{n:'Dinner',f:'Light Soup + Roti',c:350}]},{day:'Thursday',total:1310,meals:[{n:'Breakfast',f:'Halwa Puri + Chana',c:450},{n:'Lunch',f:'Palak Gosht + Roti',c:490},{n:'Dinner',f:'Khichdi + Dahi',c:370}]},{day:'Friday',total:1290,meals:[{n:'Breakfast',f:'Anda Bhurji + Toast',c:360},{n:'Lunch',f:'Nihari + Naan',c:560},{n:'Dinner',f:'Vegetables + Rice',c:370}]},{day:'Saturday',total:1480,meals:[{n:'Breakfast',f:'Full Breakfast',c:480},{n:'Lunch',f:'BBQ Platter + Naan',c:650},{n:'Dinner',f:'Daal + Roti',c:350}]},{day:'Sunday',total:1350,meals:[{n:'Breakfast',f:'Paye + Naan',c:520},{n:'Lunch',f:'Qorma + Rice',c:560},{n:'Dinner',f:'Light soup + fruit',c:270}]}];
+var foodLog=[{e:'🍛',name:'Daal Chawal',cal:520,pro:'18g'},{e:'🥚',name:'Anda Paratha',cal:480,pro:'22g'},{e:'☕',name:'Chai',cal:80,pro:'3g'}];
+var foodItems=[{e:'🍛',name:'Biryani',cal:650,pro:'28g',carb:'82g',fat:'18g'},{e:'🍗',name:'Chicken Karahi',cal:480,pro:'35g',carb:'12g',fat:'28g'},{e:'🍚',name:'Daal Chawal',cal:320,pro:'18g',carb:'42g',fat:'8g'},{e:'🥚',name:'Anda Paratha',cal:380,pro:'12g',carb:'48g',fat:'16g'}];
+var fi=0;
+
+var noNav=['splash','onboarding','login'];
+var allScr=['splash','onboarding','login','home','scanner','food','medicine','chat','reminders','tips','diet','profile','settings'];
+
+function go(n){
+  allScr.forEach(function(s){var e=document.getElementById('s-'+s);if(e)e.classList.add('h');});
+  var t=document.getElementById('s-'+n);if(t)t.classList.remove('h');
+  document.getElementById('scr').scrollTop=0;
+  var bn=document.getElementById('bnav');
+  bn.style.display=noNav.indexOf(n)<0?'flex':'none';
+  if(n==='splash'){bn.style.display='none';startSplash();}
+  if(n==='tips')buildTips();
+  if(n==='diet')buildDiet();
+  if(n==='reminders')renderRem();
+  if(n==='food')renderFoodLog();
+  if(n==='scanner')renderScanHistory();
+  if(n==='home')renderHomeFamReminders();
+  if(n==='chat'&&!chatInited){initChat();chatInited=true;}
+  if(n==='profile'){var pc=document.getElementById('profile-card');if(pc){if(isDark){pc.style.background='linear-gradient(135deg,#0D2530,#101E28)';pc.style.borderColor='rgba(7,169,150,.35)';}else{pc.style.background='';pc.style.borderColor='';}}}
+  updateClock();updateGreeting();
+}
+function gx(screen,idx,btn){
+  document.querySelectorAll('#top-btns button').forEach(function(b){b.style.background='#fff';b.style.color='#07A996';});
+  if(btn){btn.style.background='#07A996';btn.style.color='#fff';}
+  go(screen);if(idx!==null)sn(idx);
+}
+function sn(i){for(var j=0;j<5;j++){var el=document.getElementById('n'+j);if(el){el.classList.remove('act');el.querySelectorAll('span').forEach(function(s){s.style.color='#8AACAC';});}}var ac=document.getElementById('n'+i);if(ac){ac.classList.add('act');ac.querySelectorAll('span').forEach(function(s){s.style.color='#07A996';});}}
+function startSplash(){var bar=document.getElementById('splashbar'),w=0;var iv=setInterval(function(){w+=2;if(bar)bar.style.width=Math.min(w,100)+'%';if(w>=100){clearInterval(iv);go('onboarding');}},55);}
+function updateClock(){var now=new Date(),h=now.getHours(),m=now.getMinutes(),ampm=h>=12?'PM':'AM',h12=h%12||12;var tp=document.getElementById('tpill');if(tp)tp.textContent=h12+':'+(m<10?'0':'')+m+' '+ampm;}
+function updateGreeting(){var h=new Date().getHours(),k=h>=5&&h<12?'gm':h>=12&&h<17?'ga':h>=17&&h<21?'ge':'gn';var el=document.getElementById('greet-txt');if(el)el.textContent=T(k)+', '+userData.name+'! 👋';}
+
+function toggleDark(){
+  isDark=!isDark;
+  var app=document.getElementById('app');app.classList.toggle('dk',isDark);
+  document.body.classList.toggle('dk-page',isDark);
+  var btn=document.getElementById('dkbtn');if(btn)btn.textContent=isDark?'☀️':'🌙';
+  var ico=document.getElementById('dk-ico');if(ico)ico.textContent=isDark?'☀️':'🌙';
+  var sub=document.getElementById('dk-sub');if(sub)sub.textContent=isDark?T('set_dark_on'):T('set_dark_sub');
+  var tgl=document.getElementById('dk-tgl');if(tgl){tgl.classList.toggle('on',isDark);tgl.classList.toggle('off',!isDark);}
+  toast(isDark?'🌙 Dark mode on!':'☀️ Light mode on!');
+  if(isDark){
+    document.querySelectorAll('.inp').forEach(function(el){el.style.background='var(--inp)';el.style.color='var(--inptx)';});
+  } else {
+    document.querySelectorAll('.inp').forEach(function(el){el.style.background='';el.style.color='';});
+  }
+  var curScreen=null;
+  allScr.forEach(function(s){var e=document.getElementById('s-'+s);if(e&&!e.classList.contains('h'))curScreen=s;});
+  if(curScreen==='tips'){buildTips();}
+  if(curScreen==='diet'){buildDiet();}
+  if(curScreen==='reminders'){renderRem();}
+  var pc=document.getElementById('profile-card');
+  if(pc){if(isDark){pc.style.background='linear-gradient(135deg,#0D2530,#101E28)';pc.style.borderColor='rgba(7,169,150,.35)';}else{pc.style.background='';pc.style.borderColor='';}}
+}
+function stg(el){var on=el.classList.contains('on');el.classList.toggle('on',!on);el.classList.toggle('off',on);toast((!on)?'✅ On!':'⏸️ Off');}
+
+function applyLang(){
+var sc=document.querySelector('#s-scanner .shead h2');if(sc)sc.textContent='Parchi Scanner';
+var sp=document.getElementById('scan-prompt-txt');if(sp)sp.textContent='Scan your prescription here';
+}
+function setLang(l){
+  curLang=l;
+  ['en','ru','ur'].forEach(function(x){var chk=document.getElementById('lchk-'+x);if(chk){chk.textContent=(x===l)?'✓':'';chk.style.background=(x===l)?'#07A996':'transparent';chk.style.color=(x===l)?'#fff':'';}});
+  var lc=document.getElementById('lang-cur');if(lc)lc.textContent=T('lname')+' selected';
+  T('nv').forEach(function(txt,i){var sp=document.getElementById('nv'+i);if(sp)sp.textContent=txt;});
+  document.getElementById('app').style.direction=(l==='ur')?'rtl':'ltr';
+  updateGreeting();buildChips();
+  var ci=document.getElementById('ci');if(ci)ci.placeholder=(l==='ur')?'اپنا پیغام لکھیں...':(l==='ru')?'Paigham likhein...':'Type your message...';
+  var lwel=document.getElementById('lwel');if(lwel)lwel.textContent=(l==='ur')?'خوش آمدید! 👋':(l==='ru')?'Dobara Khushamdeed! 👋':'Welcome back! 👋';
+  applyLang();
+  tipsData=getTipsData();shuffleTips();ti=tipQueue[0];rdr(0);
+  if(document.getElementById('s-tips')&&!document.getElementById('s-tips').classList.contains('h'))buildTips();
+  closeModal('lang-modal');toast('🌐 '+T('lname')+' selected!');
+}
+
+function toggleWEdit(){var row=document.getElementById('w-edit-row');var showing=row.style.display==='flex';row.style.display=showing?'none':'flex';if(!showing){var inp=document.getElementById('w-goal-inp');if(inp){inp.value=wGoal;inp.focus();}}}
+function saveWGoal(){var inp=document.getElementById('w-goal-inp');var v=parseInt(inp.value);if(!v||v<1||v>20){toast('⚠️ 1-20 '+T('water_goal_lbl')+'!');return;}wGoal=v;document.getElementById('w-edit-row').style.display='none';updateWUI(true);toast('✅ '+T('water_goal_lbl')+' '+wGoal+' '+T('wt_glasses').trim()+' save!');}
+function renderWDots(prev,next,adding){
+  var el=document.getElementById('wdots');if(!el)return;
+  el.innerHTML='';
+  for(var i=0;i<wGoal;i++){
+    var dot=document.createElement('div');
+    var filled=i<next;
+    var justChanged=(adding&&i===next-1)||(!adding&&i===next);
+    var sz=wGoal>10?'10px':'14px';
+    dot.style.cssText='width:'+sz+';height:'+sz+';border-radius:50%;border:1.5px solid '+(filled?'#07A996':'rgba(7,169,150,.25)')+';background:'+(filled?'linear-gradient(135deg,#07A996,#05c9b4)':'transparent')+';transition:all .3s ease;display:flex;align-items:center;justify-content:center;font-size:6px;flex-shrink:0;';
+    if(filled&&wGoal<=10)dot.innerHTML='<span style="color:#fff;">💧</span>';
+    if(justChanged)dot.style.animation=(adding?'glassAdd':'glassDel')+' .4s ease';
+    el.appendChild(dot);
+  }
+}
+function updateWUI(resetDots){
+  var p=Math.min(100,Math.round((wc/wGoal)*100));
+  var c=131.9;
+  document.getElementById('wcnt').textContent=wc+'/'+wGoal;
+  document.getElementById('wpct').textContent=wc;
+  var goalEl=document.getElementById('wpct-goal');if(goalEl)goalEl.textContent='/'+wGoal;
+  document.getElementById('wgl').textContent=wc+' of '+wGoal+' glasses';
+  document.getElementById('wr').setAttribute('stroke-dashoffset',c-(Math.min(p,100)/100)*c);
+  var pb=document.getElementById('w-progbar');if(pb)pb.style.width=Math.min(p,100)+'%';
+  var pl=document.getElementById('w-pct-lbl');if(pl)pl.textContent=p+'% of daily goal';
+  var achSub=document.getElementById('w-ach-sub');if(achSub)achSub.textContent=T('water_achievement_title')+' '+wGoal+'/'+wGoal+T('wt_glasses')+' 💪';
+  if(resetDots)renderWDots(0,wc,true);
+}
+function closeAchieve(){
+  var ov=document.getElementById('w-achieve');
+  ov.style.animation='achFadeIn .3s ease reverse';
+  setTimeout(function(){ov.style.display='none';ov.style.animation='';},280);
+}
+function uw(d){
+  var prev=wc;
+  wc=Math.max(0,Math.min(wGoal,wc+d));
+  updateWUI(false);
+  renderWDots(prev,wc,d>0);
+  if(wc===wGoal&&prev<wGoal){
+    var ov=document.getElementById('w-achieve');
+    ov.style.display='flex';
+    ov.style.animation='achFadeIn .4s ease';
+    var ico=document.getElementById('w-ach-ico');
+    if(ico){ico.style.animation='none';setTimeout(function(){ico.style.animation='achBounce .6s ease';},50);}
+  } else {
+    toast(d>0?'💧 '+wc+' of '+wGoal+T('wt_glasses')+'!':'💧 '+wc+T('wt_glasses'));
+  }
+}
+var ti=0,tipAnimating=false;
+var tipQueue=[],tipQi=0;
+function shuffleTips(){tipQueue=tipsData.map(function(_,i){return i;});for(var i=tipQueue.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=tipQueue[i];tipQueue[i]=tipQueue[j];tipQueue[j]=tmp;}tipQi=0;}
+shuffleTips();ti=tipQueue[0];
+function nextTipIdx(dir){if(dir>=0){tipQi++;if(tipQi>=tipQueue.length)shuffleTips();ti=tipQueue[tipQi];}else{tipQi=Math.max(0,tipQi-1);ti=tipQueue[tipQi];}}
+function rdr(dir){
+  var t=tipsData[ti];
+  var inner=document.getElementById('tip-inner');
+  var tico=document.getElementById('tico');
+  var ttxt=document.getElementById('ttxt');
+  if(!inner||!tico||!ttxt)return;
+  var dots=document.getElementById('tdots');
+  if(dots){dots.innerHTML='';tipsData.slice(0,6).forEach(function(_,i){var d=document.createElement('div');d.style.cssText='width:'+(i===ti?'14':'5')+'px;height:5px;border-radius:3px;background:'+(i===ti?'#07A996':'rgba(7,169,150,.22)')+';transition:all .35s cubic-bezier(.4,0,.2,1);cursor:pointer;';d.onclick=function(){if(!tipAnimating){ti=i;rdr(1);}};dots.appendChild(d);});}
+  var slideFrom=dir>=0?'40px':'-40px';
+  inner.style.transition='none';
+  inner.style.opacity='0';
+  inner.style.transform='translateX('+slideFrom+') scale(.96)';
+  tico.style.transform='scale(.7) rotate('+(dir>=0?'15':'-15')+'deg)';
+  setTimeout(function(){
+    tico.textContent=t.e;
+    ttxt.textContent=t.t;
+    inner.style.transition='opacity .4s ease,transform .4s cubic-bezier(.4,0,.2,1)';
+    tico.style.transition='transform .4s cubic-bezier(.4,0,.2,1)';
+    inner.style.opacity='1';
+    inner.style.transform='translateX(0) scale(1)';
+    tico.style.transform='scale(1) rotate(0deg)';
+    tipAnimating=false;
+  },35);
+}
+function nxt(){if(tipAnimating)return;tipAnimating=true;nextTipIdx(1);rdr(1);}
+function prv(){if(tipAnimating)return;tipAnimating=true;nextTipIdx(-1);rdr(-1);}
+setInterval(function(){if(!tipAnimating){tipAnimating=true;nextTipIdx(1);rdr(1);}},7000);
+function buildObDots(){var d=document.getElementById('obdots');if(!d)return;d.innerHTML='';for(var i=0;i<3;i++){var dot=document.createElement('div');dot.className='obdot'+(i===obIdx?' act':'');d.appendChild(dot);}}
+function obNext(){if(obIdx<2){obIdx++;document.getElementById('obsl').style.transform='translateX(-'+(obIdx/3*100)+'%)';buildObDots();if(obIdx===2)document.getElementById('obbtns').innerHTML='<button class="obgs" onclick="go(\'login\')">Get Started →</button>';}else go('login');}
+buildObDots();
+function switchTab(t){document.getElementById('tabl').classList[t==='login'?'add':'remove']('act');document.getElementById('tabs').classList[t==='signup'?'add':'remove']('act');document.getElementById('login-form').classList[t==='login'?'remove':'add']('h');document.getElementById('signup-form').classList[t==='signup'?'remove':'add']('h');var tog=document.getElementById('auth-tog');if(tog)tog.innerHTML=t==='login'?'Don\'t have an account? <a onclick="switchTab(\'signup\')">Sign Up</a>':'Already have an account? <a onclick="switchTab(\'login\')">Login</a>';}
+function showFE(id,show){var e=document.getElementById(id);if(e)e.style.display=show?'block':'none';}
+function doLogin(){var em=document.getElementById('l-em').value.trim(),pw=document.getElementById('l-pw').value.trim(),ok=true;showFE('l-em-e',!em);if(!em)ok=false;showFE('l-pw-e',!pw);if(!pw)ok=false;if(ok){userData.name=em.includes('@')?em.split('@')[0]:'Rizwan';toast('✅ Login successful!');setTimeout(function(){go('home');sn(0);},700);}}
+function doSignup(){var n=document.getElementById('s-nm').value.trim(),em=document.getElementById('s-em').value.trim(),pw=document.getElementById('s-pw').value.trim(),cp=document.getElementById('s-cpw').value.trim(),ok=true;showFE('s-nm-e',!n);if(!n)ok=false;showFE('s-em-e',!em);if(!em)ok=false;showFE('s-pw-e',pw.length<8);if(pw.length<8)ok=false;showFE('s-cpw-e',pw!==cp);if(pw!==cp)ok=false;if(ok){userData.name=n;toast('🎉 Account created!');setTimeout(function(){go('home');sn(0);},700);}}
+function doForgot(){var em=document.getElementById('fgt-em').value.trim();if(!em){document.getElementById('fgt-em-e').style.display='block';return;}document.getElementById('fgt-em-e').style.display='none';closeModal('forgot-modal');toast('📧 Reset link sent to '+em+'!');}
+function googleSignIn(){closeModal('google-modal');userData.name='Rizwan Ahmed';toast('🔗 Signed in with Google!');setTimeout(function(){go('home');sn(0);},700);}
+/* ═══ PARCHI SCANNER — AI POWERED ═══ */
+var scanHistory = [];
+
+function handleScanFile(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var base64 = e.target.result;
+    var img = document.getElementById('scan-preview-img');
+    var icon = document.getElementById('scan-frame-icon');
+    if (img) { img.src = base64; img.style.display = 'block'; }
+    if (icon) icon.style.display = 'none';
+    document.getElementById('scan-prompt-txt').textContent = 'Image loaded ✓';
+    document.getElementById('scan-tap-txt').textContent = 'Analyzing with AI...';
+    document.getElementById('scan-result').classList.add('h');
+    document.getElementById('scan-loader').classList.remove('h');
+    document.getElementById('scr').scrollTop = 220;
+    toast('📷 Image received, analyzing...');
+    var b64data = base64.split(',')[1];
+    var mtype = file.type || 'image/jpeg';
+    analyzePrescription(b64data, mtype, base64);
+    input.value = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function analyzePrescription(b64data, mtype, previewSrc) {
+  var errors = [];
+  try {
+    var resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer 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',
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://rizwanmughalmg37-a11y.github.io',
+        'X-Title': 'RxScan'
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-2.0-flash-exp:free',
+        messages: [{
+          role: 'user',
+          content: [
+            {type: 'image_url', image_url: {url: 'data:' + mtype + ';base64,' + b64data}},
+            {type: 'text', text: 'You are a medical prescription reader for a Pakistani health app. Analyze this prescription or medicine image carefully.\n\nReturn ONLY valid JSON (no markdown, no backticks) with this exact structure:\n{"doctor":"Doctor name or Unknown","patient":"Patient name or Unknown","date":"Date or Today","diagnosis":"Condition or Not mentioned","medicines":[{"name":"Medicine name with strength","use":"What it is used for","dosage":"How many times per day and when","duration":"How many days","reminder_time":"08:00","reminder_when":"After breakfast"}],"instructions":"Special instructions","warnings":"Precautions"}\nIf image is unreadable return same JSON with Unable to read clearly as values.'}
+          ]
+        }]
+      })
+    });
+    var data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
+    var raw = data.choices[0].message.content || '';
+    var clean = raw.replace(/```json|```/g,'').trim();
+    var result = null;
+    try { result = JSON.parse(clean); } catch(e) {}
+    showScanResult(result, raw, previewSrc);
+    return;
+  } catch(e) { errors.push(e.message); }
+
+  document.getElementById('scan-loader').classList.add('h');
+  document.getElementById('scan-result').classList.remove('h');
+  document.getElementById('scan-result-body').innerHTML = '<div style="color:#E53E3E;font-size:10px;text-align:center;padding:12px;line-height:1.8;">⚠️ Error:<br>' + errors.join('<br>') + '</div>';
+  toast('Scan failed.');
+}
+
+function showScanResult(result, rawText, previewSrc) {
+  document.getElementById('scan-loader').classList.add('h');
+  document.getElementById('scan-result').classList.remove('h');
+  var body = document.getElementById('scan-result-body');
+  if (!result) {
+    body.innerHTML = '<div style="font-size:10px;color:var(--tx);white-space:pre-wrap;line-height:1.6;">' + rawText + '</div>';
+    toast('✅ Scan complete!');
+    return;
+  }
+  var html = '';
+  if (result.doctor && result.doctor !== 'Unknown') {
+    html += '<div style="font-size:9px;color:var(--sub);display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--br);"><span>Doctor</span><span style="font-weight:700;color:var(--tx);">' + result.doctor + '</span></div>';
+  }
+  if (result.patient && result.patient !== 'Unknown') {
+    html += '<div style="font-size:9px;color:var(--sub);display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--br);"><span>Patient</span><span style="font-weight:700;color:var(--tx);">' + result.patient + '</span></div>';
+  }
+  if (result.date) {
+    html += '<div style="font-size:9px;color:var(--sub);display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--br);"><span>Date</span><span style="font-weight:700;color:var(--tx);">' + result.date + '</span></div>';
+  }
+  if (result.diagnosis && result.diagnosis !== 'Not mentioned') {
+    html += '<div style="font-size:9px;color:var(--sub);display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--br);"><span>Diagnosis</span><span style="font-weight:700;color:#E53E3E;max-width:60%;text-align:right;">' + result.diagnosis + '</span></div>';
+  }
+  var meds = result.medicines || [];
+  if (meds.length > 0) {
+    html += '<div style="margin-top:8px;font-size:10px;font-weight:700;color:var(--tx);margin-bottom:5px;">Medicines (' + meds.length + ')</div>';
+    meds.forEach(function(med, idx) {
+      var safeTime = (med.reminder_time || '08:00').replace(/'/g, '');
+      var safeWhen = (med.reminder_when || 'After breakfast').replace(/'/g, '');
+      var safeName = (med.name || 'Medicine').replace(/'/g, '');
+      html += '<div style="background:var(--pl);border-radius:9px;padding:8px;margin-bottom:6px;border:1px solid var(--br);">'
+        + '<div style="font-size:10px;font-weight:700;color:var(--tx);">💊 ' + med.name + '</div>'
+        + (med.use ? '<div style="font-size:9px;color:var(--sub);margin-top:2px;">Use: ' + med.use + '</div>' : '')
+        + (med.dosage ? '<div style="font-size:9px;color:var(--sub);">Dose: ' + med.dosage + '</div>' : '')
+        + (med.duration ? '<div style="font-size:9px;color:var(--sub);">Duration: ' + med.duration + '</div>' : '')
+        + '<button onclick="reminders.unshift({name:\'' + safeName + '\',time:\'' + safeTime + '\',when:\'' + safeWhen + '\',on:true});renderRem();toast(\'✅ Reminder added!\')" style="background:#07A996;color:#fff;border:none;border-radius:7px;padding:4px 9px;font-size:9px;font-weight:700;cursor:pointer;margin-top:5px;font-family:inherit;">+ Add Reminder</button>'
+        + '</div>';
+    });
+  }
+  if (result.instructions && result.instructions.length > 3) {
+    html += '<div style="background:rgba(7,169,150,.08);border-radius:9px;padding:8px;border:1px solid rgba(7,169,150,.2);margin-top:4px;">'
+      + '<div style="font-size:9px;font-weight:700;color:#07A996;margin-bottom:2px;">📋 Instructions</div>'
+      + '<div style="font-size:9px;color:var(--tx);">' + result.instructions + '</div></div>';
+  }
+  if (result.warnings && result.warnings.length > 3) {
+    html += '<div style="background:rgba(229,62,62,.08);border-radius:9px;padding:8px;border:1px solid rgba(229,62,62,.2);margin-top:6px;">'
+      + '<div style="font-size:9px;font-weight:700;color:#E53E3E;margin-bottom:2px;">⚠️ Warnings</div>'
+      + '<div style="font-size:9px;color:var(--tx);">' + result.warnings + '</div></div>';
+  }
+  body.innerHTML = html;
+  var now = new Date();
+  var timeStr = now.getHours() + ':' + (now.getMinutes()<10?'0':'') + now.getMinutes();
+  var dateStr = now.getDate() + '/' + (now.getMonth()+1) + '/' + now.getFullYear();
+  scanHistory.unshift({
+    preview: previewSrc,
+    doctor: result.doctor || 'Unknown',
+    meds: meds.length,
+    time: timeStr,
+    date: dateStr,
+    result: result
+  });
+  renderScanHistory();
+  toast('✅ Prescription analyzed! ' + meds.length + ' medicine(s) found.');
+  document.getElementById('scr').scrollTop = 280;
+}
+
+function renderScanHistory() {
+  var el = document.getElementById('scan-history-list');
+  if (!el) return;
+  if (!scanHistory.length) {
+    el.innerHTML = '<div style="font-size:10px;color:var(--sub);text-align:center;padding:8px;">No scans yet. Upload a prescription above!</div>';
+    return;
+  }
+  el.innerHTML = '';
+  scanHistory.slice(0, 5).forEach(function(s, i) {
+    var d = document.createElement('div');
+    d.style.cssText = 'display:flex;align-items:center;gap:8px;padding:7px 0;' + (i < Math.min(scanHistory.length,5)-1 ? 'border-bottom:1px solid var(--br);' : '');
+    d.innerHTML = '<div style="width:30px;height:30px;border-radius:8px;background:var(--pl);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;overflow:hidden;">'
+      + (s.preview ? '<img src="' + s.preview + '" style="width:100%;height:100%;object-fit:cover;">' : '💊')
+      + '</div>'
+      + '<div style="flex:1;">'
+      + '<div style="font-size:10px;font-weight:600;color:var(--tx);">' + (s.doctor !== 'Unknown' ? 'Dr. ' + s.doctor : 'Prescription') + ' · ' + s.meds + ' med(s)</div>'
+      + '<div style="font-size:9px;color:var(--sub);">' + s.date + ' · ' + s.time + '</div>'
+      + '</div>'
+      + '<div style="background:var(--pl);color:#07A996;font-size:8px;font-weight:700;padding:2px 7px;border-radius:16px;">Done</div>';
+    el.appendChild(d);
+  });
+}
+
+function doFoodScan(){var f=foodItems[fi%foodItems.length];fi++;var el=document.getElementById('food-result');el.classList.remove('h');el.innerHTML='<div style="font-size:11px;font-weight:700;color:#07A996;margin-bottom:9px;">🍽️ '+f.name+'</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;"><div style="background:rgba(255,255,255,.15);border-radius:9px;padding:9px;text-align:center;border:1px solid rgba(255,255,255,.2);"><div style="font-size:16px;font-weight:800;color:#fff;">'+f.cal+'</div><div style="font-size:9px;color:rgba(255,255,255,.8);">Calories</div></div><div style="background:rgba(255,255,255,.15);border-radius:9px;padding:9px;text-align:center;border:1px solid rgba(255,255,255,.2);"><div style="font-size:16px;font-weight:800;color:#fff;">'+f.pro+'</div><div style="font-size:9px;color:rgba(255,255,255,.8);">Protein</div></div><div style="background:rgba(255,255,255,.15);border-radius:9px;padding:9px;text-align:center;border:1px solid rgba(255,255,255,.2);"><div style="font-size:16px;font-weight:800;color:#fff;">'+f.carb+'</div><div style="font-size:9px;color:rgba(255,255,255,.8);">Carbs</div></div><div style="background:rgba(255,255,255,.15);border-radius:9px;padding:9px;text-align:center;border:1px solid rgba(255,255,255,.2);"><div style="font-size:16px;font-weight:800;color:#fff;">'+f.fat+'</div><div style="font-size:9px;color:rgba(255,255,255,.8);">Fat</div></div></div><button class="btn" style="margin-top:10px;" onclick="addFL({e:\''+f.e+'\',name:\''+f.name+'\',cal:'+f.cal+',pro:\''+f.pro+'\'})">+ Add to Log</button>';toast('🍽️ '+f.name+' scanned!');}
+function addFL(f){foodLog.unshift(f);document.getElementById('fcal').textContent=parseInt(document.getElementById('fcal').textContent)+f.cal;renderFoodLog();toast('✅ '+f.name+' added!');}
+function renderFoodLog(){var el=document.getElementById('food-log');if(!el)return;el.innerHTML='';foodLog.forEach(function(f,i){var d=document.createElement('div');d.style.cssText='display:flex;align-items:center;gap:8px;padding:6px 0;'+(i<foodLog.length-1?'border-bottom:1px solid var(--br);':'');d.innerHTML='<div style="width:28px;height:28px;border-radius:8px;background:var(--rem-icon-bg);display:flex;align-items:center;justify-content:center;font-size:12px;border:1px solid var(--br);">'+f.e+'</div><div style="flex:1;"><div style="font-size:10px;font-weight:600;color:var(--tx);">'+f.name+'</div><div style="font-size:9px;color:var(--sub);">'+f.cal+' cal · '+f.pro+'</div></div>';el.appendChild(d);});}
+function medSearch(v){var el=document.getElementById('med-res');el.innerHTML='';if(v.length<2)return;var vl=v.toLowerCase();Object.keys(medDB).filter(function(k){return medDB[k].name.toLowerCase().includes(vl)||medDB[k].use.toLowerCase().includes(vl);}).forEach(function(k){var m=medDB[k];var card=document.createElement('div');
+var bg=isDark?'linear-gradient(135deg,#1A1035,#22103D)':'#fff';
+var bd=isDark?'rgba(150,100,255,.35)':'rgba(7,169,150,.18)';
+var sh=isDark?'0 4px 20px rgba(130,80,255,.18)':'0 2px 12px rgba(7,169,150,.08)';
+card.style.cssText='background:'+bg+';border-radius:11px;padding:10px;border:1px solid '+bd+';cursor:pointer;margin-bottom:5px;box-shadow:'+sh+';';
+card.innerHTML='<div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:3px;">'+m.name+'</div><div style="font-size:9px;color:#fff;background:linear-gradient(90deg,#07A996,#059688);padding:1px 6px;border-radius:9px;display:inline-block;margin-bottom:3px;">Medicine</div><div style="font-size:9px;color:var(--sub);">'+m.use+'</div>';
+card.onclick=function(){showMed(k);};el.appendChild(card);});}
+function showMed(k){
+  var m=medDB[k];if(!m)return;
+  document.getElementById('md-nm').textContent=m.name;
+  document.getElementById('md-type').textContent=m.type||'Medicine';
+  document.getElementById('md-icon').textContent=m.name.includes('ORS')?'🧂':'💊';
+  document.getElementById('md-price').textContent=m.price||'-';
+  document.getElementById('md-use').textContent=m.use||'-';
+  document.getElementById('md-dose').textContent=m.dose||'-';
+  var sideEl=document.getElementById('md-side');
+  sideEl.innerHTML='';
+  (m.side||'-').split('\n').forEach(function(line){
+    if(!line.trim())return;
+    var d=document.createElement('div');
+    d.style.cssText='display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--sub);line-height:1.6;';
+    d.innerHTML='<span style="color:#F59E0B;margin-top:2px;flex-shrink:0;">•</span><span>'+line.trim()+'</span>';
+    sideEl.appendChild(d);
+  });
+  document.getElementById('md-warn').textContent=m.warnings||'-';
+  document.getElementById('md-inter').textContent=m.interactions||'-';
+  document.getElementById('md-tips').textContent=m.tips||'-';
+  var remBtn=document.getElementById('md-rem-btn');
+  if(remBtn) remBtn.onclick=function(){
+    reminders.unshift({name:m.name,time:'08:00',when:'After breakfast',on:true});
+    renderRem();
+    toast('✅ '+m.name+' added to reminders!');
+  };
+  document.getElementById('med-sv').classList.add('h');
+  document.getElementById('med-dv').classList.remove('h');
+  document.getElementById('scr').scrollTop=0;
+  toast('💊 '+m.name+' loaded!');
+}
+function medBack(){var dv=document.getElementById('med-dv');var sv=document.getElementById('med-sv');if(!dv.classList.contains('h')){dv.classList.add('h');sv.classList.remove('h');}else go('home');}
+function initChat(){var cm=document.getElementById('cmsgs');if(!cm)return;cm.innerHTML='';var d=document.createElement('div');d.className='mai';d.style.whiteSpace='pre-line';d.textContent=T('ai');cm.appendChild(d);buildChips();}
+function buildChips(){var el=document.getElementById('chat-chips');if(!el)return;el.innerHTML='';['c1','c2','c3','c4','c5'].forEach(function(k){var chip=document.createElement('div');chip.className='chip';chip.textContent=T(k);chip.onclick=function(){var inp=document.getElementById('ci');inp.value=T(k);csend();};el.appendChild(chip);});}
+function getAIReply(msg){var ml=msg.toLowerCase();if(ml.includes('headache')||ml.includes('sir dard')||ml.includes('سر درد'))return T('ah');if(ml.includes('fever')||ml.includes('bukhar')||ml.includes('بخار'))return T('af');if(ml.includes('cough')||ml.includes('khansi')||ml.includes('کھانسی'))return T('ac');if(ml.includes('stomach')||ml.includes('pet')||ml.includes('پیٹ'))return T('as');if(ml.includes('sleep')||ml.includes('neend')||ml.includes('نیند'))return T('asl');return T('ad');}
+function csend(){var inp=document.getElementById('ci'),msg=inp.value.trim();if(!msg)return;addMsg(msg,'user');inp.value='';var typ=document.createElement('div');typ.className='mai';typ.textContent='...';document.getElementById('cmsgs').appendChild(typ);document.getElementById('cmsgs').scrollTop=99999;setTimeout(function(){typ.remove();addMsg(getAIReply(msg),'ai');},1000);}
+function addMsg(text,type){var cm=document.getElementById('cmsgs');if(!cm)return;var d=document.createElement('div');d.className=type==='ai'?'mai':'musr';d.style.whiteSpace='pre-line';d.textContent=text;cm.appendChild(d);cm.scrollTop=99999;}
+function clearChat(){var cm=document.getElementById('cmsgs');if(!cm)return;cm.innerHTML='';var d=document.createElement('div');d.className='mai';d.style.whiteSpace='pre-line';d.textContent=T('ai');cm.appendChild(d);buildChips();}
+function renderRem(){var el=document.getElementById('rem-list');if(!el)return;el.innerHTML='';if(!reminders.length){el.innerHTML='<div style="text-align:center;padding:16px;color:var(--tx);font-size:11px;background:var(--pl);border-radius:11px;border:1px solid var(--br);">'+T('rem_empty')+'</div>';return;}reminders.forEach(function(r,i){var d=document.createElement('div');d.className='remcard';var icons={'Water':'💧','Vitamin':'🌟','Augmentin':'💉'};var ico='💊';Object.keys(icons).forEach(function(k){if(r.name.includes(k))ico=icons[k];});d.innerHTML='<div style="width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">'+ico+'</div><div style="flex:1;"><div style="font-size:11px;font-weight:700;color:var(--tx);margin-bottom:1px;">'+r.name+'</div><div style="font-size:9px;color:var(--sub);">'+r.time+' · '+r.when+'</div></div><div class="tgl '+(r.on?'on':'off')+'" onclick="tgRem('+i+')" style="margin-right:5px;"><div class="tglk"></div></div><div class="remdel" onclick="delRem('+i+')">🗑️</div>';el.appendChild(d);});var st=document.getElementById('st-rem');if(st)st.textContent=reminders.filter(function(r){return r.on;}).length;}
+function tgRem(i){reminders[i].on=!reminders[i].on;renderRem();toast(reminders[i].on?'✅ On!':'⏸️ Off');}
+function delRem(i){reminders.splice(i,1);renderRem();toast('🗑️ Deleted');}
+function toggleRemForm(){remFormOpen=!remFormOpen;document.getElementById('rem-form').classList[remFormOpen?'remove':'add']('h');document.getElementById('rem-addbtn').textContent=remFormOpen?T('rem_cancel'):T('rem_add');}
+function addReminder(){var n=document.getElementById('r-nm').value.trim(),t=document.getElementById('r-tm').value,ok=true;showFE('r-nm-e',!n);if(!n)ok=false;showFE('r-tm-e',!t);if(!t)ok=false;if(ok){var w=document.getElementById('r-wh').value;reminders.unshift({name:n,time:t,when:w,on:true});renderRem();toggleRemForm();document.getElementById('r-nm').value='';toast('✅ Reminder saved!');}}
+function buildTips(){var el=document.getElementById('tips-list');if(!el)return;el.innerHTML='';var currentTips=getTipsData();currentTips.forEach(function(t,i){var d=document.createElement('div');d.className='tip-card-item';d.style.cssText='border-radius:12px;padding:11px;display:flex;align-items:flex-start;gap:9px;margin-bottom:7px;animation:fu '+(0.1+i*0.04)+'s ease;';d.innerHTML='<div style="width:34px;height:34px;background:rgba(7,169,150,.1);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;">'+t.e+'</div><div style="font-size:11px;color:var(--tx);line-height:1.6;margin-top:2px;font-weight:500;">'+t.t+'</div>';el.appendChild(d);});
+document.querySelectorAll('.tip-card-item').forEach(function(c){
+  if(isDark){c.style.background='linear-gradient(135deg,#2D2008,#3A2C0A)';c.style.border='1px solid rgba(240,180,30,.35)';c.style.boxShadow='0 4px 20px rgba(240,180,30,.15)';}
+  else{c.style.background='#fff';c.style.border='1px solid rgba(7,169,150,.18)';c.style.boxShadow='0 2px 12px rgba(7,169,150,.08)';}
+});}
+/* ═══ NEW DIET PLAN FUNCTIONS ═══ */
+var activeDietGoal='general';
+var activeDietDay=0;
+var dietMealPlans={general:{meals:[[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['2 Parathas + Yogurt'],cal:400},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Daal Chawal + Salad'],cal:500},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Biryani + Raita'],cal:600},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Apple + nuts'],cal:200}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Doodh + Corn Flakes'],cal:350},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Chicken Karahi + Naan'],cal:580},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Daal Maash + Rice'],cal:480},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Mixed fruit'],cal:150}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Paratha + Lassi + egg'],cal:420},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Biryani + Raita'],cal:650},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Soup + Roti'],cal:350},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Green tea + crackers'],cal:120}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Halwa Puri + Chana'],cal:450},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Palak Gosht + Roti'],cal:490},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Khichdi + Dahi'],cal:370},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Banana + almonds'],cal:180}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Anda Bhurji + Toast'],cal:360},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Nihari + Naan'],cal:560},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Veggies + Rice'],cal:370},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Orange + walnuts'],cal:160}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Eggs + toast + juice'],cal:480},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['BBQ + Naan + Raita'],cal:650},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Daal + Roti'],cal:350},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Fruit chaat'],cal:200}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Paye + Naan'],cal:520},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Qorma + Rice'],cal:560},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Light soup + fruit'],cal:270},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Mixed nuts'],cal:150}]]},weight:{meals:[[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Oatmeal (low sugar)'],cal:280},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Grilled chicken + veggies + 1 Roti'],cal:380},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Daal soup + salad'],cal:300},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Cucumber + green tea'],cal:50}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['2 boiled eggs + green tea'],cal:200},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Sabzi + 1 Roti + Dahi'],cal:350},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Fish curry + salad'],cal:320},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Apple'],cal:80}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Toast + boiled egg'],cal:250},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Chicken karahi + 1 Roti'],cal:400},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Vegetable soup'],cal:200},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Mixed fruits'],cal:100}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Banana smoothie + oats'],cal:260},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Daal + 1 Roti + salad'],cal:370},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Grilled chicken + veggies'],cal:310},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Carrot + hummus'],cal:90}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Greek yogurt + berries'],cal:230},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Palak gosht + 1 Roti'],cal:390},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Clear soup + toast'],cal:220},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Almonds'],cal:100}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Anda bhurji + tea'],cal:220},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Chicken salad + 1 Roti'],cal:360},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Light daal + veggies'],cal:280},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Orange'],cal:70}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Porridge + green tea'],cal:240},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Fish + salad + 1 Roti'],cal:380},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Vegetable stir fry'],cal:250},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Cucumber + lime'],cal:40}]]},muscle:{meals:[[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['4 eggs + wheat bread + milk'],cal:600},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Chicken breast + rice + salad'],cal:700},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Meat curry + 2 Roti + Dahi'],cal:750},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Protein shake + banana'],cal:350}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Anda paratha x2 + milk'],cal:580},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Daal + rice + chicken'],cal:720},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['BBQ chicken + naan'],cal:700},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Nuts + milk'],cal:300}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Haleem + bread + juice'],cal:620},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Beef karahi + naan'],cal:750},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Chicken biryani + Raita'],cal:700},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['PB toast + milk'],cal:400}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Omelette x3 + milk + toast'],cal:600},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Chicken karahi + 2 Roti'],cal:680},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Fish + rice + salad'],cal:650},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Banana + almonds + milk'],cal:350}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Paratha x2 + eggs + lassi'],cal:650},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Mutton karahi + naan'],cal:800},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Daal + rice + chicken'],cal:700},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Protein bar + milk'],cal:380}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Full fry-up + milk'],cal:700},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Biryani + Raita + chicken'],cal:800},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Nihari + naan'],cal:750},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Dates + milk + nuts'],cal:400}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Egg fried rice + milk'],cal:620},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Qorma + 2 Roti + salad'],cal:760},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Grilled chicken + rice'],cal:680},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Shake: milk + oats + banana'],cal:420}]]},diabetes:{meals:[[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['2 eggs + wheat roti + green tea'],cal:280},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Daal + 1 Roti + cucumber salad'],cal:380},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Grilled fish + sabzi'],cal:330},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Unsalted nuts'],cal:120}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Oatmeal + egg + tea no sugar'],cal:270},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Chicken soup + 1 Roti'],cal:360},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Palak sabzi + 1 Roti + Dahi'],cal:310},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Small apple or guava'],cal:80}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['2 egg omelette + toast + green tea'],cal:250},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Brown rice (small) + sabzi'],cal:390},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Daal soup + salad'],cal:290},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Cucumber + lemon water'],cal:30}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Besan paratha (no ghee) + tea'],cal:300},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Karela sabzi + 1 Roti + Dahi'],cal:340},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Fish curry + salad'],cal:320},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Walnuts + green tea'],cal:110}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Dahi + egg + roti'],cal:280},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Chicken + tinda + 1 Roti'],cal:370},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Khichdi (no sugar) + Dahi'],cal:300},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Pears + almonds'],cal:130}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Porridge + fenugreek water'],cal:240},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Grilled chicken + veggies'],cal:380},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Daal + 1 Roti + salad'],cal:310},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Mixed seeds + water'],cal:80}],[{icon:'☕',bg:'rgba(255,180,50,.12)',name:'Breakfast',foods:['Scrambled eggs + wheat toast'],cal:260},{icon:'☀️',bg:'rgba(255,150,30,.12)',name:'Lunch',foods:['Sabzi + 1 Roti + clear soup'],cal:350},{icon:'🌙',bg:'rgba(100,100,255,.1)',name:'Dinner',foods:['Steamed veg + grilled fish'],cal:290},{icon:'🍎',bg:'rgba(80,200,80,.1)',name:'Snacks',foods:['Carrot sticks + lemon'],cal:50}]]}};
+function selectDietGoal(goal){
+  activeDietGoal=goal;
+  document.querySelectorAll('.dgoalbtn').forEach(function(b){b.classList.remove('dgoalbtn-act');});
+  var map={weight:'dg-weight',muscle:'dg-muscle',diabetes:'dg-diabetes',general:'dg-general'};
+  var el=document.getElementById(map[goal]);
+  if(el)el.classList.add('dgoalbtn-act');
+  renderDietMeals();
+  toast('✅ Goal: '+el.textContent.trim());
+}
+function selectDietDay(idx){
+  activeDietDay=idx;
+  document.querySelectorAll('.ddaytab').forEach(function(t){t.classList.remove('ddaytab-act');});
+  var el=document.getElementById('dt-'+idx);
+  if(el)el.classList.add('ddaytab-act');
+  renderDietMeals();
+}
+function renderDietMeals(){
+  var el=document.getElementById('diet-meal-cards');
+  if(!el)return;
+  el.innerHTML='';
+  var plan=dietMealPlans[activeDietGoal];
+  if(!plan)return;
+  var dayMeals=plan.meals[activeDietDay]||plan.meals[0];
+  dayMeals.forEach(function(meal,i){
+    var d=document.createElement('div');
+    d.className='dmealcard a'+(i+1);
+    d.innerHTML='<div style="display:flex;align-items:center;gap:9px;margin-bottom:6px;">'
+      +'<div class="dmealicon" style="background:'+meal.bg+';">'+meal.icon+'</div>'
+      +'<div class="dmealname">'+meal.name+'</div>'
+      +'</div>'
+      +'<div class="dmealdesc">'+meal.foods.join('<br>')
+      +' - <span style="color:#07A996;font-weight:700;">approximately '+meal.cal+' calories</span></div>';
+    el.appendChild(d);
+  });
+}
+function dietRegenerate(){
+  toast('✨ Plan regenerating...');
+  setTimeout(function(){renderDietMeals();toast('✅ New plan ready!');},600);
+}
+function buildDiet(){
+  renderDietMeals();
+}
+function tgDiet(hdr){var body=hdr.nextElementSibling.nextElementSibling;var arr=hdr.querySelector('span');var open=!body.classList.contains('h');body.classList.toggle('h',open);if(arr)arr.style.transform=open?'':'rotate(90deg)';}
+function showModal(id){var e=document.getElementById(id);if(e)e.classList.remove('h');}
+function closeModal(id){var e=document.getElementById(id);if(e)e.classList.add('h');}
+document.querySelectorAll('.mov').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)m.classList.add('h');});});
+var toastTimer;
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.style.opacity='0';},2200);}
+function uploadSpImg(inp){var file=inp.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){var img=document.getElementById('sp-img');var initials=document.getElementById('sp-initials');if(img){img.src=e.target.result;img.style.display='block';}if(initials)initials.style.display='none';toast('✅ Photo updated!');};reader.readAsDataURL(file);}
+var selectedRating=0;
+var ratingLabels=['','Bahut Bura 😞','Theek Nahi 😕','Theek Hai 🙂','Acha Hai 😊','Zabardast! 🤩'];
+function setRating(n){
+  selectedRating=n;
+  for(var i=1;i<=5;i++){
+    var s=document.getElementById('rs'+i);
+    if(s){s.textContent=i<=n?'⭐':'☆';s.style.transform=i===n?'scale(1.3)':'scale(1)';}
+  }
+  var lbl=document.getElementById('rate-label');
+  if(lbl)lbl.textContent=ratingLabels[n]||'';
+}
+function submitRating(){
+  if(!selectedRating){toast('⚠️ Pehle stars select karein!');return;}
+  closeModal('rate-modal');
+  toast('🎉 Shukriya! '+selectedRating+' star rating ke liye!');
+  selectedRating=0;
+  for(var i=1;i<=5;i++){var s=document.getElementById('rs'+i);if(s)s.textContent='☆';}
+  var fb=document.getElementById('rate-feedback');if(fb)fb.value='';
+  var lbl=document.getElementById('rate-label');if(lbl)lbl.textContent='';
+}
+/* ═══════════════════════════════════════
+   FAMILY MEMBERS — FULL FEATURE
+═══════════════════════════════════════ */
+var famRemIdx = 0;
+var famMembers = [];
+var famEditIdx = -1;
+var famDetailIdx = -1;
+var famCurrentColor = '#4361EE';
+var famPhotoData = '';
+
+/* ── helpers ── */
+function openFamModal(editIdx) {
+  famEditIdx = (editIdx !== undefined) ? editIdx : -1;
+  famPhotoData = '';
+  var title = document.getElementById('fam-modal-title');
+  var saveBtn = document.getElementById('fm-save-btn');
+  if (famEditIdx >= 0) {
+    var m = famMembers[famEditIdx];
+    title.innerHTML = '✏️ Edit Member <div class="mcls" onclick="closeFamModal()">✕</div>';
+    saveBtn.textContent = '✅ Update Member';
+    document.getElementById('fm-name').value = m.name || '';
+    document.getElementById('fm-rel').value = m.rel || 'Me';
+    document.getElementById('fm-age').value = m.age || '';
+    document.getElementById('fm-gender').value = m.gender || 'Male';
+    document.getElementById('fm-blood').value = m.blood || 'O+';
+    document.getElementById('fm-allergy').value = m.allergy || '';
+    document.getElementById('fm-conditions').value = m.conditions || '';
+    document.getElementById('fm-meds').value = m.meds || '';
+    famCurrentColor = m.color || '#07A996';
+    famPhotoData = m.photo || '';
+    updateFamModalAv(m.name, m.color, m.photo);
+  } else {
+    title.innerHTML = '👨‍👩‍👧 Add Family Member <div class="mcls" onclick="closeFamModal()">✕</div>';
+    saveBtn.textContent = '✅ Save Member';
+    document.getElementById('fm-name').value = '';
+    document.getElementById('fm-rel').value = 'Me';
+    document.getElementById('fm-age').value = '';
+    document.getElementById('fm-gender').value = 'Male';
+    document.getElementById('fm-blood').value = 'O+';
+    document.getElementById('fm-allergy').value = '';
+    document.getElementById('fm-conditions').value = '';
+    document.getElementById('fm-meds').value = '';
+    famCurrentColor = '#4361EE';
+    famPhotoData = '';
+    updateFamModalAv('', '#4361EE', '');
+  }
+  updateFamColorDots(famCurrentColor);
+  document.getElementById('fam-modal').classList.remove('h');
+}
+
+function closeFamModal() {
+  document.getElementById('fam-modal').classList.add('h');
+  document.getElementById('fm-name-e').style.display = 'none';
+}
+
+function famPhotoUpload(inp) {
+  var file = inp.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    famPhotoData = e.target.result;
+    var img = document.getElementById('fam-av-img');
+    var init = document.getElementById('fam-av-init');
+    if (img) { img.src = famPhotoData; img.style.display = 'block'; }
+    if (init) init.style.display = 'none';
+    toast('📷 Photo added!');
+  };
+  reader.readAsDataURL(file);
+  inp.value = '';
+}
+
+function setFamColor(c) {
+  famCurrentColor = c;
+  var preview = document.getElementById('fam-av-preview');
+  if (preview) preview.style.background = c;
+  updateFamColorDots(c);
+}
+
+function updateFamColorDots(active) {
+  var dots = document.querySelectorAll('#fam-color-row div');
+  var colors = ['#4361EE','#07A996','#7C3AED','#F59E0B','#E53E3E','#EC4899','#06B6D4','#84CC16'];
+  dots.forEach(function(d, i) {
+    d.style.border = colors[i] === active ? '3px solid #111' : '3px solid transparent';
+    d.style.transform = colors[i] === active ? 'scale(1.18)' : 'scale(1)';
+  });
+}
+
+function updateFamInitial(val) {
+  var init = document.getElementById('fam-av-init');
+  if (init && !famPhotoData) init.textContent = val ? val.charAt(0).toUpperCase() : '?';
+}
+
+function updateFamModalAv(name, color, photo) {
+  var preview = document.getElementById('fam-av-preview');
+  var img = document.getElementById('fam-av-img');
+  var init = document.getElementById('fam-av-init');
+  if (preview) preview.style.background = color || '#07A996';
+  if (photo) {
+    if (img) { img.src = photo; img.style.display = 'block'; }
+    if (init) init.style.display = 'none';
+  } else {
+    if (img) img.style.display = 'none';
+    if (init) { init.style.display = ''; init.textContent = name ? name.charAt(0).toUpperCase() : '?'; }
+  }
+}
+
+function saveFamMember() {
+  var name = document.getElementById('fm-name').value.trim();
+  if (!name) { document.getElementById('fm-name-e').style.display = 'block'; return; }
+  document.getElementById('fm-name-e').style.display = 'none';
+  var member = {
+    name: name,
+    rel: document.getElementById('fm-rel').value,
+    age: document.getElementById('fm-age').value,
+    gender: document.getElementById('fm-gender').value,
+    blood: document.getElementById('fm-blood').value,
+    allergy: document.getElementById('fm-allergy').value,
+    conditions: document.getElementById('fm-conditions').value,
+    meds: document.getElementById('fm-meds').value,
+    color: famCurrentColor,
+    photo: famPhotoData,
+    reminders: famEditIdx >= 0 ? (famMembers[famEditIdx].reminders || []) : []
+  };
+  if (famEditIdx >= 0) {
+    famMembers[famEditIdx] = member;
+    toast('✅ Member updated!');
+  } else {
+    famMembers.push(member);
+    toast('✅ ' + name + ' added!');
+  }
+  closeFamModal();
+  renderFamList();
+  renderHomeFamReminders();
+}
+
+function renderFamList() {
+  var el = document.getElementById('fam-list');
+  if (!el) return;
+  if (!famMembers.length) {
+    el.innerHTML = '<div style="text-align:center;padding:18px;background:var(--pl);border-radius:14px;border:1px dashed var(--br);font-size:11px;color:var(--sub);">No family members added yet</div>';
+    return;
+  }
+  el.innerHTML = '';
+  famMembers.forEach(function(m, i) {
+    var card = document.createElement('div');
+    card.style.cssText = 'background:var(--card);border-radius:16px;border:1px solid var(--br);overflow:hidden;box-shadow:0 2px 12px rgba(7,169,150,.07);margin-bottom:2px;';
+    var avHtml = m.photo
+      ? '<div style="width:56px;height:56px;border-radius:14px;overflow:hidden;flex-shrink:0;"><img src="'+m.photo+'" style="width:100%;height:100%;object-fit:cover;"></div>'
+      : '<div style="width:56px;height:56px;border-radius:14px;background:'+m.color+';display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;flex-shrink:0;">'+m.name.charAt(0).toUpperCase()+'</div>';
+    var bloodColor = (m.blood||'').includes('-') ? '#E53E3E' : '#E53E3E';
+    var bloodBg = 'rgba(229,62,62,.12)';
+    var relBadge = '<div style="background:var(--pl);border:1px solid var(--br);border-radius:20px;padding:2px 9px;font-size:10px;font-weight:600;color:var(--tx);">'+m.rel+'</div>';
+    var ageTxt = m.age ? '<span style="font-size:11px;color:var(--sub);">Age '+m.age+'</span>' : '';
+    var bloodBadge = '<div style="background:'+bloodBg+';border:1px solid rgba(229,62,62,.25);border-radius:20px;padding:2px 9px;font-size:10px;font-weight:700;color:#E53E3E;">'+( m.blood||'?')+'</div>';
+
+    var activeRems = (m.reminders||[]).filter(function(r){return r.on!==false;}).length;
+    var isExpanded = m._expanded || false;
+
+    card.innerHTML =
+      '<div style="display:flex;align-items:center;gap:12px;padding:13px 14px;cursor:pointer;" onclick="toggleFamCard('+i+')">'
+      + avHtml
+      + '<div style="flex:1;min-width:0;">'
+      + '<div style="font-size:15px;font-weight:800;color:var(--tx);margin-bottom:5px;">'+m.name+'</div>'
+      + '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">'+relBadge+ageTxt+bloodBadge+'</div>'
+      + (activeRems ? '<div style="font-size:9px;color:#07A996;font-weight:600;margin-top:4px;">⏰ '+activeRems+' reminder'+(activeRems>1?'s':'')+'</div>' : '')
+      + '</div>'
+      + '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">'
+      + '<div onclick="event.stopPropagation();openFamModal('+i+')" style="width:32px;height:32px;border-radius:9px;background:var(--pl);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Edit">✏️</div>'
+      + '<div onclick="event.stopPropagation();deleteFamMember('+i+')" style="width:32px;height:32px;border-radius:9px;background:rgba(229,62,62,.08);border:1px solid rgba(229,62,62,.2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" title="Delete">🗑️</div>'
+      + '<div style="width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--sub);transition:transform .3s;transform:'+(isExpanded?'rotate(180deg)':'rotate(0deg)')+'" id="fam-chev-'+i+'">˅</div>'
+      + '</div>'
+      + '</div>'
+      + '<div id="fam-detail-'+i+'" style="display:'+(isExpanded?'block':'none')+';border-top:1px solid var(--br);padding:12px 14px;">'
+      + (m.allergy ? '<div style="margin-bottom:8px;"><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;"><span style="color:#F59E0B;">⚠️</span><span style="font-size:10px;font-weight:700;color:var(--sub);">Allergies</span></div><div style="display:flex;flex-wrap:wrap;gap:5px;">'
+        + m.allergy.split(',').map(function(a){return '<div style="border:1.5px solid #F59E0B;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#F59E0B;">'+a.trim()+'</div>';}).join('')
+        + '</div></div>' : '')
+      + (m.conditions ? '<div style="margin-bottom:8px;"><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;"><span style="color:#E53E3E;">🩺</span><span style="font-size:10px;font-weight:700;color:var(--sub);">Chronic Conditions</span></div><div style="display:flex;flex-wrap:wrap;gap:5px;">'
+        + m.conditions.split(',').map(function(a){return '<div style="border:1.5px solid #E53E3E;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:700;color:#E53E3E;">'+a.trim()+'</div>';}).join('')
+        + '</div></div>' : '')
+      + (m.meds ? '<div style="margin-bottom:8px;"><div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;"><span style="color:#07A996;">💊</span><span style="font-size:10px;font-weight:700;color:var(--sub);">Current Medications</span></div><div style="display:flex;flex-wrap:wrap;gap:5px;">'
+        + m.meds.split(',').map(function(a){return '<div style="background:var(--pl);border:1px solid var(--br);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:600;color:var(--tx);">'+a.trim()+'</div>';}).join('')
+        + '</div></div>' : '')
+      + '<div style="margin-top:8px;"><button onclick="openFamDetail('+i+')" style="width:100%;background:linear-gradient(135deg,#07A996,#059688);color:#fff;border:none;border-radius:10px;padding:9px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;">⏰ View / Add Reminders</button></div>'
+      + '</div>';
+
+    el.appendChild(card);
+  });
+}
+
+function toggleFamCard(i) {
+  famMembers[i]._expanded = !famMembers[i]._expanded;
+  var detail = document.getElementById('fam-detail-'+i);
+  var chev = document.getElementById('fam-chev-'+i);
+  if (detail) detail.style.display = famMembers[i]._expanded ? 'block' : 'none';
+  if (chev) chev.style.transform = famMembers[i]._expanded ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+function deleteFamMember(i) {
+  var name = famMembers[i].name;
+  var modal = document.getElementById('fam-del-modal');
+  var msg = document.getElementById('fam-del-msg');
+  if(msg) msg.textContent = 'Remove "' + name + '" from family?';
+  if(modal){ modal.classList.remove('h'); modal.setAttribute('data-del-idx', i); }
+}
+function confirmFamDelete() {
+  var modal = document.getElementById('fam-del-modal');
+  var i = parseInt(modal.getAttribute('data-del-idx'));
+  var name = famMembers[i] ? famMembers[i].name : '';
+  if(famMembers[i]) famMembers.splice(i, 1);
+  modal.classList.add('h');
+  renderFamList(); renderHomeFamReminders();
+  if(name) toast('Removed: ' + name);
+}
+
+/* ── Detail Modal ── */
+function openFamDetail(i) {
+  famDetailIdx = i;
+  var m = famMembers[i];
+  var today = new Date().toISOString().split('T')[0];
+  var dateInp = document.getElementById('fd-rem-date');
+  if (dateInp) dateInp.value = today;
+
+  /* avatar */
+  var avEl = document.getElementById('fd-av');
+  if (m.photo) {
+    avEl.innerHTML = '<img src="' + m.photo + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+    avEl.style.background = 'transparent';
+  } else {
+    avEl.textContent = m.name.charAt(0).toUpperCase();
+    avEl.style.background = m.color;
+  }
+  document.getElementById('fd-name').textContent = m.name;
+  document.getElementById('fd-info').textContent = m.rel + (m.age ? ' · ' + m.age + ' yrs' : '') + ' · ' + m.gender + ' · 🩸 ' + m.blood;
+  document.getElementById('fam-detail-title').innerHTML = '👤 ' + m.name + ' <div class="mcls" onclick="closeModal(\'fam-detail-modal\')">✕</div>';
+
+  /* health tags */
+  var hEl = document.getElementById('fd-health');
+  var hHtml = '';
+  if (m.allergy) hHtml += '<div style="background:rgba(229,62,62,.08);border-radius:10px;padding:7px 10px;margin-bottom:5px;border:1px solid rgba(229,62,62,.18);"><span style="font-size:9px;font-weight:700;color:#E53E3E;">⚠️ Allergies: </span><span style="font-size:9px;color:var(--tx);">' + m.allergy + '</span></div>';
+  if (m.conditions) hHtml += '<div style="background:rgba(7,169,150,.08);border-radius:10px;padding:7px 10px;margin-bottom:5px;border:1px solid rgba(7,169,150,.18);"><span style="font-size:9px;font-weight:700;color:#07A996;">🩺 Conditions: </span><span style="font-size:9px;color:var(--tx);">' + m.conditions + '</span></div>';
+  if (m.meds) hHtml += '<div style="background:rgba(108,92,231,.08);border-radius:10px;padding:7px 10px;margin-bottom:5px;border:1px solid rgba(108,92,231,.18);"><span style="font-size:9px;font-weight:700;color:#7C3AED;">💊 Current Meds: </span><span style="font-size:9px;color:var(--tx);">' + m.meds + '</span></div>';
+  hEl.innerHTML = hHtml;
+
+  /* clear reminder form */
+  ['fd-rem-name','fd-rem-dose','fd-rem-days','fd-rem-notes'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+  var tEl = document.getElementById('fd-rem-time'); if(tEl) tEl.value = '08:00';
+  var wEl = document.getElementById('fd-rem-when'); if(wEl) wEl.value = 'After breakfast';
+
+  renderFamReminders(i);
+  document.getElementById('fam-detail-modal').classList.remove('h');
+}
+
+function editFamMember() {
+  closeModal('fam-detail-modal');
+  openFamModal(famDetailIdx);
+}
+
+function renderFamReminders(i) {
+  var el = document.getElementById('fd-rem-list');
+  if (!el) return;
+  var m = famMembers[i];
+  var rems = m.reminders || [];
+  if (!rems.length) {
+    el.innerHTML = '<div style="font-size:10px;color:var(--sub);padding:8px;background:var(--pl);border-radius:10px;text-align:center;border:1px dashed var(--br);">No reminders yet — add one below</div>';
+    return;
+  }
+  el.innerHTML = '';
+  rems.forEach(function(r, ri) {
+    var d = document.createElement('div');
+    d.style.cssText = 'background:var(--card);border-radius:11px;padding:10px;border:1px solid var(--br);display:flex;align-items:flex-start;gap:8px;margin-bottom:5px;';
+    var daysLeft = '';
+    if (r.startDate && r.days) {
+      var end = new Date(new Date(r.startDate).getTime() + r.days * 86400000);
+      var left = Math.ceil((end - new Date()) / 86400000);
+      daysLeft = left > 0 ? left + ' days left' : 'Course complete ✓';
+    }
+    d.innerHTML = '<div style="width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#07A996,#059688);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">💊</div>'
+      + '<div style="flex:1;min-width:0;">'
+      + '<div style="font-size:11px;font-weight:700;color:var(--tx);">' + r.name + '</div>'
+      + '<div style="font-size:9px;color:var(--sub);">⏰ ' + r.time + ' · ' + r.when + (r.dose ? ' · ' + r.dose : '') + '</div>'
+      + (r.startDate ? '<div style="font-size:9px;color:var(--sub);">📅 ' + r.startDate + (r.days ? ' · ' + r.days + ' days' : '') + '</div>' : '')
+      + (daysLeft ? '<div style="font-size:9px;font-weight:700;margin-top:2px;color:' + (daysLeft.includes('complete') ? '#07A996' : '#F59E0B') + ';">📊 ' + daysLeft + '</div>' : '')
+      + (r.notes ? '<div style="font-size:9px;color:var(--sub);font-style:italic;margin-top:1px;">📝 ' + r.notes + '</div>' : '')
+      + '</div>'
+      + '<div onclick="deleteFamReminder(' + i + ',' + ri + ')" style="color:#E53E3E;font-size:14px;cursor:pointer;padding:2px 4px;">🗑️</div>';
+    el.appendChild(d);
+  });
+}
+
+function addFamReminder() {
+  var name = document.getElementById('fd-rem-name').value.trim();
+  if (!name) { toast('⚠️ Medicine name required!'); return; }
+  var time  = document.getElementById('fd-rem-time').value || '08:00';
+  var dose  = document.getElementById('fd-rem-dose').value.trim();
+  var days  = document.getElementById('fd-rem-days').value;
+  var when  = document.getElementById('fd-rem-when').value;
+  var date  = document.getElementById('fd-rem-date').value;
+  var notes = document.getElementById('fd-rem-notes').value.trim();
+  var rem = { name:name, time:time, dose:dose, days:days, when:when, startDate:date, notes:notes, on:true };
+  if (!famMembers[famDetailIdx].reminders) famMembers[famDetailIdx].reminders = [];
+  famMembers[famDetailIdx].reminders.unshift(rem);
+  scheduleRemNotif(famMembers[famDetailIdx].name, rem);
+  renderFamReminders(famDetailIdx);
+  renderFamList();
+  renderHomeFamReminders();
+  ['fd-rem-name','fd-rem-dose','fd-rem-days','fd-rem-notes'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+  toast('⏰ Reminder set for ' + famMembers[famDetailIdx].name + ' — ' + name + '!');
+}
+
+function deleteFamReminder(mi, ri) {
+  famMembers[mi].reminders.splice(ri, 1);
+  renderFamReminders(mi);
+  renderFamList();
+  renderHomeFamReminders();
+  toast('🗑️ Reminder removed');
+}
+
+/* ── Dashboard widget ── */
+function renderHomeFamReminders() {
+  var sec=document.getElementById('home-fam-rem-sec');
+  var list=document.getElementById('home-fam-rem-list');
+  var dots=document.getElementById('fam-rem-dots');
+  if(!sec||!list) return;
+  var all=[];
+  famMembers.forEach(function(m){
+    (m.reminders||[]).forEach(function(r){ if(r.on!==false) all.push({member:m,rem:r}); });
+  });
+  if(!all.length){sec.style.display='none';return;}
+  sec.style.display='';
+  all.sort(function(a,b){return a.rem.time.localeCompare(b.rem.time);});
+  if(famRemIdx>=all.length) famRemIdx=0;
+  var item=all[famRemIdx];var m=item.member;var r=item.rem;
+  var daysLeft='';
+  if(r.startDate&&r.days){
+    var left=Math.ceil((new Date(r.startDate).getTime()+r.days*86400000-Date.now())/86400000);
+    daysLeft=left>0?(left+' days left'):'Course done';
+  }
+  var avHtml=m.photo
+    ?('<div style="width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid '+m.color+';"><img src="'+m.photo+'" style="width:100%;height:100%;object-fit:cover;"></div>')
+    :('<div style="width:40px;height:40px;border-radius:50%;background:'+m.color+';display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;">'+m.name.charAt(0).toUpperCase()+'</div>');
+  var mi=famMembers.indexOf(m);
+  list.innerHTML='<div onclick="openFamDetail('+mi+')" style="background:var(--card);border-radius:13px;border:1px solid var(--br);padding:11px 13px;display:flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 2px 10px rgba(7,169,150,.08);animation:fu .3s ease;">'
+    +avHtml
+    +'<div style="flex:1;min-width:0;">'
+    +'<div style="font-size:11px;font-weight:700;color:var(--tx);">'+r.name+'</div>'
+    +'<div style="font-size:9px;color:var(--sub);">'+m.name+' ('+m.rel+')'+(r.dose?' - '+r.dose:'')+'</div>'
+    +(r.when?('<div style="font-size:9px;color:var(--sub);">'+r.when+'</div>'):'')
+    +(daysLeft?('<div style="font-size:9px;font-weight:600;color:'+(daysLeft==='Course done'?'#07A996':'#F59E0B')+';">'+daysLeft+'</div>'):'')
+    +'</div>'
+    +'<div style="text-align:right;flex-shrink:0;">'
+    +'<div style="font-size:14px;font-weight:800;color:#07A996;">'+r.time+'</div>'
+    +'<div style="font-size:8px;color:var(--sub);margin-top:2px;">'+(famRemIdx+1)+' / '+all.length+'</div>'
+    +'</div></div>';
+  if(dots){
+    dots.innerHTML='';
+    all.forEach(function(_,i){
+      var d=document.createElement('div');
+      d.style.cssText='width:'+(i===famRemIdx?'14':'5')+'px;height:5px;border-radius:3px;background:'+(i===famRemIdx?'#07A996':'rgba(7,169,150,.25)')+';transition:all .3s;cursor:pointer;';
+      d.onclick=(function(idx){return function(){famRemIdx=idx;renderHomeFamReminders();};})(i);
+      dots.appendChild(d);
+    });
+  }
+}
+function famRemNext(){
+  var n=0;famMembers.forEach(function(m){(m.reminders||[]).forEach(function(r){if(r.on!==false)n++;});});
+  if(!n)return;famRemIdx=(famRemIdx+1)%n;renderHomeFamReminders();
+}
+function famRemPrev(){
+  var n=0;famMembers.forEach(function(m){(m.reminders||[]).forEach(function(r){if(r.on!==false)n++;});});
+  if(!n)return;famRemIdx=(famRemIdx-1+n)%n;renderHomeFamReminders();
+}
+
+function scheduleRemNotif(memberName, rem) {
+  if (!('Notification' in window)) return;
+  function fire() {
+    var parts = (rem.time||'08:00').split(':');
+    var now   = new Date();
+    var target= new Date();
+    target.setHours(+parts[0], +parts[1], 0, 0);
+    if (target <= now) target.setDate(target.getDate()+1);
+    setTimeout(function() {
+      if (Notification.permission === 'granted') {
+        new Notification('💊 ' + memberName + ' — Medicine Time!', {
+          body: rem.name + (rem.dose ? '  ·  ' + rem.dose : '') + '\n' + rem.when,
+          icon: ''
+        });
+      }
+      if (rem.on !== false) fire(); /* reschedule daily */
+    }, target - new Date());
+  }
+  if (Notification.permission === 'granted') {
+    fire();
+  } else if (Notification.permission === 'default') {
+    Notification.requestPermission().then(function(p){ if(p==='granted') fire(); });
+  }
+}
+
+/* ── In-app reminder check every minute ── */
+setInterval(function(){
+  var now = new Date();
+  var hh  = now.getHours().toString().padStart(2,'0');
+  var mm  = now.getMinutes().toString().padStart(2,'0');
+  var cur = hh + ':' + mm;
+  famMembers.forEach(function(m){
+    (m.reminders||[]).forEach(function(r){
+      if (r.on !== false && r.time === cur) {
+        toast('⏰ ' + m.name + ': Take ' + r.name + (r.dose?' ('+r.dose+')':'') + ' now!');
+      }
+    });
+  });
+}, 60000);
+
+function saveApiKey(){var k=document.getElementById('apikey-inp').value.trim();if(!k){toast('⚠️ API key enter karein');return;}window._rxApiKey=k;try{localStorage.setItem('_rxk',k);}catch(e){}document.getElementById('apikey-modal').classList.add('h');toast('✅ API key save ho gayi! Ab scan karein.');}
+try{var _sk=localStorage.getItem('_rxk');if(_sk)window._rxApiKey=_sk;}catch(e){}
+if(!window._rxApiKey)window._rxApiKey='AIzaSyDlMNNZZzalVhW_nJHGBSmTN1KcOhv4_ew';
+go('splash');setTimeout(function(){rdr(0);updateWUI(true);applyLang();},300);renderFoodLog();
+</script>
+</body>
+</html>
